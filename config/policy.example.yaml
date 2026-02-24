@@ -1,0 +1,38 @@
+# Harambee Policy Config (example)
+
+roles:
+  oga_architect:
+    enabled: true
+  reviewer_worker:
+    required_for_pr_merge: true
+
+approval:
+  all_prs_require_human_approval: false
+  critical_prs_require_human_approval: true
+  criticality:
+    complexity_threshold: 4
+    labels:
+      - critical-change
+      - security
+      - data-migration
+
+fix_window:
+  default_minutes: 30
+  max_new_tasks_during_window: 0
+  reassign_to_same_agent: true
+
+assignment:
+  ack_timeout_min: 15
+  stale_timeout_min: 120
+  max_tasks_per_worker: 1
+  oqa_assigns_tasks_only: true
+
+workflow:
+  enforce_artifact_gates: true
+  enforce_independent_reviewer: true
+  decompose_complexity_at_or_above: 4
+
+communication:
+  canonical_surface: github
+  use_discussions: true
+  mirror_external_decisions_to_issue_comments: true
