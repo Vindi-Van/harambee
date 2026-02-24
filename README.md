@@ -27,8 +27,12 @@ This repo currently contains the **v1 design docs** and execution plan for:
 - `docs/milestones.md` — Milestones, phases, and delivery checkpoints
 - `docs/task-breakdown.md` — Actionable work packages
 - `docs/contracts/` — Role contracts (including Reviewer Worker)
-- `docs/governance/` — Labels, states, and transition gate definitions
+- `docs/governance/` — Labels, states, transition gates, PR approval policy, and standards
+- `docs/protocols/` — Assignment and discussion protocols
+- `docs/pilots/` — End-to-end pilot execution examples
 - `docs/rubrics/complexity.md` — Complexity scoring system
+- `config/policy.example.yaml` — Configurable workflow/policy controls
+- `CONTEXT.md` / `CHANGELOG.md` — architecture decision log and change history
 
 ## Immediate Next Step
 
