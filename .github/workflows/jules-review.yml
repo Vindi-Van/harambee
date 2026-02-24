@@ -1,4 +1,4 @@
-name: Jules PR Review
+name: Jules PR Reviewer
 
 on:
   pull_request:
@@ -8,12 +8,17 @@ jobs:
   review:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Invoke Jules Reviewer
-        uses: google-labs-code/jules-invoke@v1
+      - name: Run Jules Agent
+        uses: google-labs-code/jules-action@main
         with:
           jules_api_key: ${{ secrets.JULES_API_KEY }}
           prompt: |
-            Review this Pull Request. Check for logic errors, security vulnerabilities, and adherence to project style. Provide feedback as a comment on the PR.
+            You are a senior code reviewer. Analyze this Pull Request for:
+            1. Logic errors and potential bugs.
+            2. Performance bottlenecks (especially in React Native components).
+            3. Adherence to project styling.
+            4. Specific focus: Ensure iPad Air layout stability and rotation-safe Flexbox styling.
+            Provide your feedback as inline comments on the PR where possible.
