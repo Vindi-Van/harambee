@@ -8,16 +8,16 @@
 
 ### Mode A: All PRs require human approval
 ```yaml
-all_prs_require_human_approval: true
-critical_prs_require_human_approval: false
+allPrsRequireHumanApproval: true
+criticalPrsRequireHumanApproval: false
 ```
 
 ### Mode B: Critical PRs require human approval only
 ```yaml
-all_prs_require_human_approval: false
-critical_prs_require_human_approval: true
+allPrsRequireHumanApproval: false
+criticalPrsRequireHumanApproval: true
 criticality:
-  complexity_threshold: 4
+  complexityThreshold: 4
   labels:
     - critical-change
     - security
