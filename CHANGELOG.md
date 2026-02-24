@@ -21,3 +21,6 @@ The format is based on Keep a Changelog, and this project follows Semantic Versi
 - Unit tests for Oga runtime service behavior.
 - Adapter handlers for assignment, transition, and webhook payload inputs.
 - Unit tests for adapter routing and normalized decision outputs.
+- Execution handler contracts, dispatcher, and in-memory handler scaffold.
+- Runtime bindings from adapter decisions to execution handlers.
+- Unit tests for execution binding flow.

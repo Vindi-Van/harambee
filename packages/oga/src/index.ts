@@ -25,3 +25,16 @@ export type {
 export { handleAssignmentInput } from "./adapters/assignmentAdapter.js";
 export { handleTransitionInput } from "./adapters/transitionAdapter.js";
 export { handleWebhookPayload } from "./adapters/webhookAdapter.js";
+
+export type {
+  AssignmentDecisionHandler,
+  ExecutionAction,
+  TransitionDecisionHandler
+} from "./execution/types.js";
+export { toExecutionAction } from "./execution/types.js";
+export { ExecutionDispatcher } from "./execution/dispatcher.js";
+export {
+  InMemoryAssignmentHandler,
+  InMemoryTransitionHandler
+} from "./execution/inMemoryHandlers.js";
+export { processAssignment, processTransition } from "./execution/runtimeBindings.js";

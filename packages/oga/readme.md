@@ -10,4 +10,5 @@ Policy guard utilities and runtime decision service for Oga orchestration.
 - `src/engine.ts`
 - `src/policyGuards.ts`
 - `src/adapters/*`
+- `src/execution/*`
 - `src/types.ts`
