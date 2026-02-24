@@ -27,6 +27,7 @@ This repo currently contains the **v1 design docs** and execution plan for:
 - `docs/milestones.md` — Milestones, phases, and delivery checkpoints
 - `docs/task-breakdown.md` — Actionable work packages
 - `docs/contracts/` — Role contracts (including Reviewer Worker)
+- `docs/governance/` — Labels, states, and transition gate definitions
 - `docs/rubrics/complexity.md` — Complexity scoring system
 
 ## Immediate Next Step
