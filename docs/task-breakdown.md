@@ -13,8 +13,9 @@
 1. Finalize OgaArchitect contract
 2. Finalize UI agent contract (design/brand/accessibility requirements)
 3. Finalize Coding agent contract (tests/build/quality requirements)
-4. Finalize QA agent contract (verification matrix + reject criteria)
-5. Finalize DevOps contract (release and rollback requirements)
+4. Finalize Reviewer Worker contract (independent PR review)
+5. Finalize QA agent contract (verification matrix + reject criteria)
+6. Finalize DevOps contract (release and rollback requirements)
 
 ## Track C — Quality & Complexity
 
