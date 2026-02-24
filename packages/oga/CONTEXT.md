@@ -28,3 +28,8 @@
 - Added in-memory handlers for side-effect-safe routing.
 - Added runtime binding helpers from adapter inputs to handlers.
 - Added tests for assignment/transition binding flow.
+
+### 2026-02-24 — GitHub assignment handler scaffold (Matrim)
+- Added `GitHubClient` interface boundary for DI/mocking.
+- Added `GitHubAssignmentHandler` for allowed/denied assignment actions.
+- Added P0 unit tests for mutation and denial-audit behavior.

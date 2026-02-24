@@ -24,3 +24,5 @@ The format is based on Keep a Changelog, and this project follows Semantic Versi
 - Execution handler contracts, dispatcher, and in-memory handler scaffold.
 - Runtime bindings from adapter decisions to execution handlers.
 - Unit tests for execution binding flow.
+- GitHub assignment execution handler scaffold with injected GitHub client boundary.
+- P0 tests for allowed/denied assignment mutation behavior.
