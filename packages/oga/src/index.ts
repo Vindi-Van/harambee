@@ -15,3 +15,13 @@ export {
 
 export type { AssignmentDecision, TransitionDecision } from "./engine.js";
 export { OgaRuntimeService } from "./engine.js";
+
+export type {
+  AdapterDecisionOutput,
+  AssignmentAdapterInput,
+  TransitionAdapterInput
+} from "./adapters/types.js";
+
+export { handleAssignmentInput } from "./adapters/assignmentAdapter.js";
+export { handleTransitionInput } from "./adapters/transitionAdapter.js";
+export { handleWebhookPayload } from "./adapters/webhookAdapter.js";
