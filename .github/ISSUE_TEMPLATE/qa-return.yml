@@ -1,0 +1,34 @@
+name: QA Return
+about: Return a task from Verification to Execution with actionable defects
+title: "[QA Return] "
+labels: ["status:qa-return", "stage:execution", "priority:p1"]
+body:
+  - type: input
+    id: source-task
+    attributes:
+      label: Source Task/PR
+      placeholder: "#123 / PR #45"
+    validations:
+      required: true
+
+  - type: textarea
+    id: defects
+    attributes:
+      label: Defects Found
+      description: What failed and why.
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction Steps
+      description: Exact repro path + expected vs actual.
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Logs/screenshots/videos/test output.

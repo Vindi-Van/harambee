@@ -1,0 +1,45 @@
+name: Feature Task
+about: Create a feature task for Harambee workflow
+title: "[Feature] "
+labels: ["stage:intake", "status:ready"]
+body:
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: What are we building and why?
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: Clear testable outcomes.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: complexity
+    attributes:
+      label: Complexity
+      options:
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "5"
+    validations:
+      required: true
+
+  - type: textarea
+    id: artifacts
+    attributes:
+      label: Required Artifacts
+      description: UI spec, PR, test report, etc.
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: List blocking tasks/issues.

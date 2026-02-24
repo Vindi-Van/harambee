@@ -27,6 +27,7 @@ Future option: split into separate `Oga` and `Architect` roles when scale requir
 Example roles:
 - UI Agent
 - Coding Agent
+- Reviewer Worker (independent PR review)
 - QA Agent
 - DevOps Agent
 - Planning Agent
@@ -100,6 +101,7 @@ After handoff, the prior stage owner enters a reserved fix window.
 - returned issues from next stage take priority
 - new task assignment can be blocked during window
 - goal: reduce QA bounce-back backlog
+- defaults are configurable per role/project (`fix_window_min`, `max_new_tasks_during_fix_window`)
 
 ## 7) Complexity and Fractal Decomposition
 
@@ -119,6 +121,10 @@ Human can:
 - approve/reject review gate
 - request decomposition changes
 - demand architecture revisions
+- configure PR approval policy:
+  - `all_prs_require_human_approval: true|false`
+  - `critical_prs_require_human_approval: true|false`
+  - criticality derived from labels and/or complexity thresholds
 
 ## 9) Future Architecture (deferred)
 

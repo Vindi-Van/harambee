@@ -34,10 +34,10 @@ Deliverables:
 Exit criteria:
 - 3 simulated tasks assigned without race/collision
 
-## M3 — Contracts in Practice
+## M3 — Contracts in Practice (M = Milestone)
 
 Deliverables:
-- UI/Coding/QA/DevOps contract checklists applied in task templates
+- UI/Coding/Reviewer/QA/DevOps contract checklists applied in task templates
 - evidence gates per stage
 - QA bounce-back loop and priority return
 
