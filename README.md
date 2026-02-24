@@ -30,7 +30,6 @@ This repo currently contains the **v1 design docs** and execution plan for:
 - `docs/governance/` — Labels, states, transition gates, PR approval policy, and standards
 - `docs/protocols/` — Assignment and discussion protocols
 - `docs/pilots/` — End-to-end pilot execution examples
-- `docs/culture.md` — Team culture and operating values
 - `docs/rubrics/complexity.md` — Complexity scoring system
 - `config/policy.example.yaml` — Configurable workflow/policy controls
 - `CONTEXT.md` / `CHANGELOG.md` — architecture decision log and change history
