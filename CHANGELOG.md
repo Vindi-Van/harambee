@@ -17,3 +17,5 @@ The format is based on Keep a Changelog, and this project follows Semantic Versi
 - Initial Oga runtime guard package scaffold (`@harambee/oga`).
 - Assignment and transition guard helpers using loaded runtime policy.
 - Unit tests for Oga guard behavior.
+- `OgaRuntimeService` scaffold for policy-backed assignment/transition decisions.
+- Unit tests for Oga runtime service behavior.
