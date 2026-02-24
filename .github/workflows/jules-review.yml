@@ -1,0 +1,19 @@
+name: Jules PR Review
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Invoke Jules Reviewer
+        uses: google-labs-code/jules-invoke@v1
+        with:
+          jules_api_key: ${{ secrets.JULES_API_KEY }}
+          prompt: |
+            Review this Pull Request. Check for logic errors, security vulnerabilities, and adherence to project style. Provide feedback as a comment on the PR.
