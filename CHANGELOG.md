@@ -14,3 +14,6 @@ The format is based on Keep a Changelog, and this project follows Semantic Versi
 - Initial TypeScript policy package scaffold (`@harambee/policy`).
 - Runtime YAML policy loader with schema validation.
 - Unit tests for valid/invalid policy config loading.
+- Initial Oga runtime guard package scaffold (`@harambee/oga`).
+- Assignment and transition guard helpers using loaded runtime policy.
+- Unit tests for Oga guard behavior.
