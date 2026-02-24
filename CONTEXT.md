@@ -37,3 +37,10 @@ Core references:
 - Added YAML policy parsing + Zod schema checks.
 - Added initial tests for valid/invalid policy paths.
 - Agent: Matrim
+
+### 2026-02-24 — Oga Runtime Policy Guards
+- Added `@harambee/oga` package scaffold.
+- Implemented assignment and transition guard helpers.
+- Added policy-driven human approval and decomposition checks.
+- Added unit tests for guard behavior.
+- Agent: Matrim
