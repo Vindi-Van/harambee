@@ -50,3 +50,9 @@ Core references:
 - Exposed assignment and transition evaluation methods.
 - Added tests for service decision paths.
 - Agent: Matrim
+
+### 2026-02-24 — Oga Adapter Wiring (scaffold)
+- Added adapter handlers for assignment, transition, and webhook inputs.
+- Added normalized adapter output contract.
+- Added tests for adapter routing behavior.
+- Agent: Matrim

@@ -17,3 +17,8 @@
 ### 2026-02-24 — Runtime service scaffold (Matrim)
 - Added `OgaRuntimeService` for assignment and transition evaluation.
 - Added service-level tests for decision behavior.
+
+### 2026-02-24 — Adapter routing scaffold (Matrim)
+- Added assignment/transition/webhook adapter handlers.
+- Added normalized adapter output envelopes.
+- Added adapter-level tests for routing + decision behavior.

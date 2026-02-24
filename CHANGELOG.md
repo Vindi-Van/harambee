@@ -19,3 +19,5 @@ The format is based on Keep a Changelog, and this project follows Semantic Versi
 - Unit tests for Oga guard behavior.
 - `OgaRuntimeService` scaffold for policy-backed assignment/transition decisions.
 - Unit tests for Oga runtime service behavior.
+- Adapter handlers for assignment, transition, and webhook payload inputs.
+- Unit tests for adapter routing and normalized decision outputs.
