@@ -22,3 +22,9 @@
 - Added assignment/transition/webhook adapter handlers.
 - Added normalized adapter output envelopes.
 - Added adapter-level tests for routing + decision behavior.
+
+### 2026-02-24 — Execution handler bindings scaffold (Matrim)
+- Added execution action contracts and dispatcher.
+- Added in-memory handlers for side-effect-safe routing.
+- Added runtime binding helpers from adapter inputs to handlers.
+- Added tests for assignment/transition binding flow.
