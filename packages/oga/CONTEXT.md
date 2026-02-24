@@ -13,3 +13,7 @@
 - Added typed guard inputs/outputs.
 - Added assignment and transition guard functions.
 - Added unit tests for key policy paths.
+
+### 2026-02-24 — Runtime service scaffold (Matrim)
+- Added `OgaRuntimeService` for assignment and transition evaluation.
+- Added service-level tests for decision behavior.

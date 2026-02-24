@@ -12,3 +12,6 @@ export {
   canTransitionStage,
   requiresHumanApprovalForPr
 } from "./policyGuards.js";
+
+export type { AssignmentDecision, TransitionDecision } from "./engine.js";
+export { OgaRuntimeService } from "./engine.js";

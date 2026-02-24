@@ -44,3 +44,9 @@ Core references:
 - Added policy-driven human approval and decomposition checks.
 - Added unit tests for guard behavior.
 - Agent: Matrim
+
+### 2026-02-24 — Oga Runtime Service Loop (scaffold)
+- Added `OgaRuntimeService` to centralize policy-backed decisions.
+- Exposed assignment and transition evaluation methods.
+- Added tests for service decision paths.
+- Agent: Matrim
