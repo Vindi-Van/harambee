@@ -44,3 +44,5 @@ export type { GitHubAssignmentContext } from "./execution/github/githubAssignmen
 export { GitHubAssignmentHandler } from "./execution/github/githubAssignmentHandler.js";
 export type { GitHubTransitionContext } from "./execution/github/githubTransitionHandler.js";
 export { GitHubTransitionHandler } from "./execution/github/githubTransitionHandler.js";
+export type { GitHubExecutionContext } from "./execution/github/createGitHubExecutionDispatcher.js";
+export { createGitHubExecutionDispatcher } from "./execution/github/createGitHubExecutionDispatcher.js";

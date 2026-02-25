@@ -1,12 +1,13 @@
 # WORKBOARD
 
 ## Now
-- Implement `GitHubTransitionHandler` in `packages/oga/src/execution/github/githubTransitionHandler.ts`.
-- Add focused tests in `packages/oga/test/execution/githubTransitionHandler.test.ts`.
+- Add GitHub execution dispatcher factory in `packages/oga/src/execution/github/createGitHubExecutionDispatcher.ts`.
+- Wire export path and validate build/test pass for dispatcher composition.
 
 ## Next
-- Wire transition handler exports + runtime/dispatcher usage.
-- Run `npm run check` and open PR.
+- Integrate factory usage into `runtimeBindings.ts` transition path.
+- Add error classification hooks (retriable vs non-retriable) for GitHub handler failures.
+- Run `npm run check` and open next PR.
 
 ## Blocked
 - None.
