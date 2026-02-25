@@ -1,3 +1,4 @@
+import { executeWithRetry } from "../retryExecutor.js";
 import type { AssignmentDecisionHandler, ExecutionAction } from "../types.js";
 import type { GitHubClient } from "./githubClient.js";
 import { GitHubExecutionError } from "./githubExecutionError.js";
@@ -55,20 +56,35 @@ export class GitHubAssignmentHandler implements AssignmentDecisionHandler {
         return;
       }
 
-      await this.client.addAssignees({
-        ...issueRef,
-        assignees: this.context.assignees
-      });
+      await executeWithRetry(
+        async () => {
+          await this.client.addAssignees({
+            ...issueRef,
+            assignees: this.context.assignees
+          });
+        },
+        { classifyError: (error) => this.client.classifyError?.(error) }
+      );
 
-      await this.client.addLabels({
-        ...issueRef,
-        labels: this.context.labels
-      });
+      await executeWithRetry(
+        async () => {
+          await this.client.addLabels({
+            ...issueRef,
+            labels: this.context.labels
+          });
+        },
+        { classifyError: (error) => this.client.classifyError?.(error) }
+      );
 
-      await this.client.createComment({
-        ...issueRef,
-        body: `Assignment applied (requestId: ${action.requestId}).`
-      });
+      await executeWithRetry(
+        async () => {
+          await this.client.createComment({
+            ...issueRef,
+            body: `Assignment applied (requestId: ${action.requestId}).`
+          });
+        },
+        { classifyError: (error) => this.client.classifyError?.(error) }
+      );
 
       this.seenRequestIds.add(action.requestId);
     } catch (error: unknown) {

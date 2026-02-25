@@ -1,3 +1,4 @@
+import { executeWithRetry } from "../retryExecutor.js";
 import type { ExecutionAction, TransitionDecisionHandler } from "../types.js";
 import type { GitHubClient } from "./githubClient.js";
 import { GitHubExecutionError } from "./githubExecutionError.js";
@@ -55,16 +56,26 @@ export class GitHubTransitionHandler implements TransitionDecisionHandler {
       }
 
       if (this.context.transitionLabels.length > 0) {
-        await this.client.addLabels({
-          ...issueRef,
-          labels: this.context.transitionLabels
-        });
+        await executeWithRetry(
+          async () => {
+            await this.client.addLabels({
+              ...issueRef,
+              labels: this.context.transitionLabels
+            });
+          },
+          { classifyError: (error) => this.client.classifyError?.(error) }
+        );
       }
 
-      await this.client.createComment({
-        ...issueRef,
-        body: `Transition applied (requestId: ${action.requestId}).`
-      });
+      await executeWithRetry(
+        async () => {
+          await this.client.createComment({
+            ...issueRef,
+            body: `Transition applied (requestId: ${action.requestId}).`
+          });
+        },
+        { classifyError: (error) => this.client.classifyError?.(error) }
+      );
 
       this.seenRequestIds.add(action.requestId);
     } catch (error: unknown) {
