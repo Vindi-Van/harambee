@@ -1,12 +1,14 @@
 import { describe, expect, it, vi } from "vitest";
 import type { GitHubClient } from "../../src/execution/github/githubClient.js";
+import { GitHubExecutionError } from "../../src/execution/github/githubExecutionError.js";
 import { GitHubTransitionHandler } from "../../src/execution/github/githubTransitionHandler.js";
 
 function createMockClient(): GitHubClient {
   return {
     addAssignees: vi.fn(async () => undefined),
     addLabels: vi.fn(async () => undefined),
-    createComment: vi.fn(async () => undefined)
+    createComment: vi.fn(async () => undefined),
+    classifyError: vi.fn(() => ({ retryable: false }))
   };
 }
 
@@ -62,5 +64,29 @@ describe("GitHubTransitionHandler", () => {
         body: expect.stringContaining("missing artifacts")
       })
     );
+  });
+
+  it("test_transition_error_uses_retry_classifier", async () => {
+    const client = createMockClient();
+    (client.addLabels as any).mockRejectedValueOnce(new Error("rate limited"));
+    (client.classifyError as any).mockReturnValueOnce({ retryable: true });
+
+    const handler = new GitHubTransitionHandler(client, {
+      owner: "Vindi-Van",
+      repo: "harambee",
+      issueNumber: 127,
+      transitionLabels: ["stage:verification"]
+    });
+
+    await expect(
+      handler.handle({
+        kind: "transition",
+        requestId: "req-tr-3",
+        allowed: true
+      })
+    ).rejects.toMatchObject({
+      name: "GitHubExecutionError",
+      retryable: true
+    } satisfies Partial<GitHubExecutionError>);
   });
 });

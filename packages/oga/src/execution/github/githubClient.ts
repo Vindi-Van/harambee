@@ -2,6 +2,7 @@
  * Minimal GitHub client boundary for assignment execution side effects.
  */
 export interface GitHubClient {
+  classifyError?(error: unknown): { retryable: boolean; reason?: string; retryAfterMs?: number };
   addAssignees(params: {
     owner: string;
     repo: string;

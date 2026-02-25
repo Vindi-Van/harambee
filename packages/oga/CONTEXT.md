@@ -38,3 +38,8 @@
 - Added `GitHubTransitionHandler` for allowed/denied transition actions.
 - Added idempotent request replay suppression via `requestId`.
 - Added P0 unit tests for transition mutation and denial-audit behavior.
+
+### 2026-02-25 — GitHub error classification + retry hook scaffold (Matrim)
+- Added `GitHubExecutionError` wrapper with retryable metadata.
+- Added optional `classifyError` hook on `GitHubClient` boundary.
+- Assignment/transition handlers now map underlying errors into retryability-aware execution errors.
