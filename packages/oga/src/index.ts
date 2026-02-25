@@ -37,7 +37,12 @@ export {
   InMemoryAssignmentHandler,
   InMemoryTransitionHandler
 } from "./execution/inMemoryHandlers.js";
-export { processAssignment, processTransition } from "./execution/runtimeBindings.js";
+export {
+  processAssignment,
+  processAssignmentWithGitHub,
+  processTransition,
+  processTransitionWithGitHub
+} from "./execution/runtimeBindings.js";
 
 export type { GitHubClient } from "./execution/github/githubClient.js";
 export type { GitHubAssignmentContext } from "./execution/github/githubAssignmentHandler.js";
