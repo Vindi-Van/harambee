@@ -42,3 +42,5 @@ export { processAssignment, processTransition } from "./execution/runtimeBinding
 export type { GitHubClient } from "./execution/github/githubClient.js";
 export type { GitHubAssignmentContext } from "./execution/github/githubAssignmentHandler.js";
 export { GitHubAssignmentHandler } from "./execution/github/githubAssignmentHandler.js";
+export type { GitHubTransitionContext } from "./execution/github/githubTransitionHandler.js";
+export { GitHubTransitionHandler } from "./execution/github/githubTransitionHandler.js";

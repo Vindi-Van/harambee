@@ -26,3 +26,5 @@ The format is based on Keep a Changelog, and this project follows Semantic Versi
 - Unit tests for execution binding flow.
 - GitHub assignment execution handler scaffold with injected GitHub client boundary.
 - P0 tests for allowed/denied assignment mutation behavior.
+- GitHub transition execution handler scaffold with idempotent request handling.
+- P0 tests for allowed/denied transition mutation behavior.

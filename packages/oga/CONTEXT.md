@@ -33,3 +33,8 @@
 - Added `GitHubClient` interface boundary for DI/mocking.
 - Added `GitHubAssignmentHandler` for allowed/denied assignment actions.
 - Added P0 unit tests for mutation and denial-audit behavior.
+
+### 2026-02-24 — GitHub transition handler scaffold (Matrim)
+- Added `GitHubTransitionHandler` for allowed/denied transition actions.
+- Added idempotent request replay suppression via `requestId`.
+- Added P0 unit tests for transition mutation and denial-audit behavior.
