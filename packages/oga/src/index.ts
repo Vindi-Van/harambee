@@ -45,6 +45,7 @@ export {
 } from "./execution/runtimeBindings.js";
 
 export type { GitHubClient } from "./execution/github/githubClient.js";
+export { GitHubExecutionError } from "./execution/github/githubExecutionError.js";
 export type { GitHubAssignmentContext } from "./execution/github/githubAssignmentHandler.js";
 export { GitHubAssignmentHandler } from "./execution/github/githubAssignmentHandler.js";
 export type { GitHubTransitionContext } from "./execution/github/githubTransitionHandler.js";

@@ -1,5 +1,6 @@
 import type { AssignmentDecisionHandler, ExecutionAction } from "../types.js";
 import type { GitHubClient } from "./githubClient.js";
+import { GitHubExecutionError } from "./githubExecutionError.js";
 
 /**
  * Context required to execute assignment mutations on a GitHub issue.
@@ -44,30 +45,40 @@ export class GitHubAssignmentHandler implements AssignmentDecisionHandler {
       issueNumber: this.context.issueNumber
     };
 
-    if (!action.allowed) {
+    try {
+      if (!action.allowed) {
+        await this.client.createComment({
+          ...issueRef,
+          body: `Assignment denied (requestId: ${action.requestId}). Reason: ${action.reason ?? "unknown"}`
+        });
+        this.seenRequestIds.add(action.requestId);
+        return;
+      }
+
+      await this.client.addAssignees({
+        ...issueRef,
+        assignees: this.context.assignees
+      });
+
+      await this.client.addLabels({
+        ...issueRef,
+        labels: this.context.labels
+      });
+
       await this.client.createComment({
         ...issueRef,
-        body: `Assignment denied (requestId: ${action.requestId}). Reason: ${action.reason ?? "unknown"}`
+        body: `Assignment applied (requestId: ${action.requestId}).`
       });
+
       this.seenRequestIds.add(action.requestId);
-      return;
+    } catch (error: unknown) {
+      const classification = this.client.classifyError?.(error);
+      const retryable = classification?.retryable ?? false;
+      throw new GitHubExecutionError(
+        `GitHub assignment execution failed for requestId ${action.requestId}`,
+        retryable,
+        error
+      );
     }
-
-    await this.client.addAssignees({
-      ...issueRef,
-      assignees: this.context.assignees
-    });
-
-    await this.client.addLabels({
-      ...issueRef,
-      labels: this.context.labels
-    });
-
-    await this.client.createComment({
-      ...issueRef,
-      body: `Assignment applied (requestId: ${action.requestId}).`
-    });
-
-    this.seenRequestIds.add(action.requestId);
   }
 }

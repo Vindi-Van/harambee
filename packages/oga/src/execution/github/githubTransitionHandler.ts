@@ -1,5 +1,6 @@
 import type { ExecutionAction, TransitionDecisionHandler } from "../types.js";
 import type { GitHubClient } from "./githubClient.js";
+import { GitHubExecutionError } from "./githubExecutionError.js";
 
 /**
  * Context required to execute transition mutations on a GitHub issue.
@@ -43,27 +44,37 @@ export class GitHubTransitionHandler implements TransitionDecisionHandler {
       issueNumber: this.context.issueNumber
     };
 
-    if (!action.allowed) {
+    try {
+      if (!action.allowed) {
+        await this.client.createComment({
+          ...issueRef,
+          body: `Transition denied (requestId: ${action.requestId}). Reason: ${action.reason ?? "unknown"}`
+        });
+        this.seenRequestIds.add(action.requestId);
+        return;
+      }
+
+      if (this.context.transitionLabels.length > 0) {
+        await this.client.addLabels({
+          ...issueRef,
+          labels: this.context.transitionLabels
+        });
+      }
+
       await this.client.createComment({
         ...issueRef,
-        body: `Transition denied (requestId: ${action.requestId}). Reason: ${action.reason ?? "unknown"}`
+        body: `Transition applied (requestId: ${action.requestId}).`
       });
+
       this.seenRequestIds.add(action.requestId);
-      return;
+    } catch (error: unknown) {
+      const classification = this.client.classifyError?.(error);
+      const retryable = classification?.retryable ?? false;
+      throw new GitHubExecutionError(
+        `GitHub transition execution failed for requestId ${action.requestId}`,
+        retryable,
+        error
+      );
     }
-
-    if (this.context.transitionLabels.length > 0) {
-      await this.client.addLabels({
-        ...issueRef,
-        labels: this.context.transitionLabels
-      });
-    }
-
-    await this.client.createComment({
-      ...issueRef,
-      body: `Transition applied (requestId: ${action.requestId}).`
-    });
-
-    this.seenRequestIds.add(action.requestId);
   }
 }

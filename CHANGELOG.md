@@ -28,4 +28,6 @@ The format is based on Keep a Changelog, and this project follows Semantic Versi
 - P0 tests for allowed/denied assignment mutation behavior.
 - GitHub transition execution handler scaffold with idempotent request handling.
 - P0 tests for allowed/denied transition mutation behavior.
+- GitHub execution error wrapper + optional client-side error classification hook.
+- Retryability-aware error propagation in assignment/transition handlers.
 - GitHub issue templates for `Bug Task` and `Blocker` workflow intake.
