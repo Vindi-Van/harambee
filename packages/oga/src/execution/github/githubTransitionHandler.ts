@@ -52,10 +52,12 @@ export class GitHubTransitionHandler implements TransitionDecisionHandler {
       return;
     }
 
-    await this.client.addLabels({
-      ...issueRef,
-      labels: this.context.transitionLabels
-    });
+    if (this.context.transitionLabels.length > 0) {
+      await this.client.addLabels({
+        ...issueRef,
+        labels: this.context.transitionLabels
+      });
+    }
 
     await this.client.createComment({
       ...issueRef,
