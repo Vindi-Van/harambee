@@ -46,7 +46,7 @@ export class GitHubTransitionHandler implements TransitionDecisionHandler {
     if (!action.allowed) {
       await this.client.createComment({
         ...issueRef,
-        body: `Transition denied (requestId: ${action.requestId}). Reason: ${action.reason ?? "unknown"}`
+        body: `Transition denied (requestId: ${action.requestId}). Reason: ${action.reason?.trim() || "unknown"}`
       });
       this.seenRequestIds.add(action.requestId);
       return;
