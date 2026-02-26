@@ -23,6 +23,9 @@ This repo currently contains the **v1 design docs** and execution plan for:
 
 ## Docs Index
 
+- `docs/getting-started.md` — 10-minute operator quickstart
+- `docs/install.md` — Requirements, permissions, setup, and governance bootstrap
+- `docs/cli-walkthrough.md` — Day-0/day-1 command walkthrough (`gh` + optional OpenClaw)
 - `docs/architecture.md` — System design and workflow model
 - `docs/milestones.md` — Milestones, phases, and delivery checkpoints
 - `docs/task-breakdown.md` — Actionable work packages
