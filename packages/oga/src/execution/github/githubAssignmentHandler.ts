@@ -25,6 +25,24 @@ export class GitHubAssignmentHandler implements AssignmentDecisionHandler {
   private readonly context: GitHubAssignmentContext;
   private readonly seenRequestIds: Set<string>;
 
+  private async shouldSkipComment(issueRef: {
+    owner: string;
+    repo: string;
+    issueNumber: number;
+  }, requestId: string): Promise<boolean> {
+    try {
+      const alreadyCommented =
+        (await this.client.hasRequestComment?.({
+          ...issueRef,
+          requestId
+        })) ?? false;
+      return alreadyCommented;
+    } catch {
+      // Fail-open: if comment lookup fails, continue and attempt createComment.
+      return false;
+    }
+  }
+
   constructor(client: GitHubClient, context: GitHubAssignmentContext) {
     this.client = client;
     this.context = context;
@@ -50,10 +68,7 @@ export class GitHubAssignmentHandler implements AssignmentDecisionHandler {
       if (!action.allowed) {
         await executeWithRetry(
           async () => {
-            const alreadyCommented = await this.client.hasRequestComment?.({
-              ...issueRef,
-              requestId: action.requestId
-            });
+            const alreadyCommented = await this.shouldSkipComment(issueRef, action.requestId);
             if (alreadyCommented) {
               return;
             }
@@ -90,10 +105,7 @@ export class GitHubAssignmentHandler implements AssignmentDecisionHandler {
 
       await executeWithRetry(
         async () => {
-          const alreadyCommented = await this.client.hasRequestComment?.({
-            ...issueRef,
-            requestId: action.requestId
-          });
+          const alreadyCommented = await this.shouldSkipComment(issueRef, action.requestId);
           if (alreadyCommented) {
             return;
           }

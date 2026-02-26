@@ -24,6 +24,24 @@ export class GitHubTransitionHandler implements TransitionDecisionHandler {
   private readonly context: GitHubTransitionContext;
   private readonly seenRequestIds: Set<string>;
 
+  private async shouldSkipComment(issueRef: {
+    owner: string;
+    repo: string;
+    issueNumber: number;
+  }, requestId: string): Promise<boolean> {
+    try {
+      const alreadyCommented =
+        (await this.client.hasRequestComment?.({
+          ...issueRef,
+          requestId
+        })) ?? false;
+      return alreadyCommented;
+    } catch {
+      // Fail-open: if comment lookup fails, continue and attempt createComment.
+      return false;
+    }
+  }
+
   constructor(client: GitHubClient, context: GitHubTransitionContext) {
     this.client = client;
     this.context = context;
@@ -49,10 +67,7 @@ export class GitHubTransitionHandler implements TransitionDecisionHandler {
       if (!action.allowed) {
         await executeWithRetry(
           async () => {
-            const alreadyCommented = await this.client.hasRequestComment?.({
-              ...issueRef,
-              requestId: action.requestId
-            });
+            const alreadyCommented = await this.shouldSkipComment(issueRef, action.requestId);
             if (alreadyCommented) {
               return;
             }
@@ -81,10 +96,7 @@ export class GitHubTransitionHandler implements TransitionDecisionHandler {
 
       await executeWithRetry(
         async () => {
-          const alreadyCommented = await this.client.hasRequestComment?.({
-            ...issueRef,
-            requestId: action.requestId
-          });
+          const alreadyCommented = await this.shouldSkipComment(issueRef, action.requestId);
           if (alreadyCommented) {
             return;
           }

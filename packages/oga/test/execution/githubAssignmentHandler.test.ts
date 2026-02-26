@@ -150,6 +150,46 @@ describe("GitHubAssignmentHandler", () => {
     expect(client.addAssignees).toHaveBeenCalledOnce();
     expect(client.addLabels).toHaveBeenCalledOnce();
     expect(client.hasRequestComment).toHaveBeenCalledOnce();
+    expect(client.hasRequestComment).toHaveBeenCalledWith(
+      expect.objectContaining({
+        owner: "Vindi-Van",
+        repo: "harambee",
+        issueNumber: 131,
+        requestId: "req-5"
+      })
+    );
+    expect(client.createComment).not.toHaveBeenCalled();
+  });
+
+  it("test_denied_assignment_skips_comment_when_request_comment_already_exists", async () => {
+    const client = createMockClient();
+    (client.hasRequestComment as any).mockResolvedValue(true);
+
+    const handler = new GitHubAssignmentHandler(client, {
+      owner: "Vindi-Van",
+      repo: "harambee",
+      issueNumber: 132,
+      assignees: ["matrim"],
+      labels: ["stage:execution"]
+    });
+
+    await handler.handle({
+      kind: "assignment",
+      requestId: "req-6",
+      allowed: false
+    });
+
+    expect(client.addAssignees).not.toHaveBeenCalled();
+    expect(client.addLabels).not.toHaveBeenCalled();
+    expect(client.hasRequestComment).toHaveBeenCalledOnce();
+    expect(client.hasRequestComment).toHaveBeenCalledWith(
+      expect.objectContaining({
+        owner: "Vindi-Van",
+        repo: "harambee",
+        issueNumber: 132,
+        requestId: "req-6"
+      })
+    );
     expect(client.createComment).not.toHaveBeenCalled();
   });
 });
