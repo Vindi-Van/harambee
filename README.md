@@ -31,7 +31,7 @@ This repo currently contains the **v1 design docs** and execution plan for:
 - `docs/task-breakdown.md` — Actionable work packages
 - `docs/contracts/` — Role contracts (including Reviewer Worker)
 - `docs/governance/` — Labels, states, transition gates, PR approval policy, and standards
-- `docs/protocols/` — Assignment and discussion protocols
+- `docs/protocols/` — Assignment, discussion, and agent onboarding protocols
 - `docs/pilots/` — End-to-end pilot execution examples
 - `docs/rubrics/complexity.md` — Complexity scoring system
 - `config/policy.example.yaml` — Configurable workflow/policy controls
