@@ -1,3 +1,4 @@
+import { InMemoryIdempotencyStore, type IdempotencyStore } from "../idempotencyStore.js";
 import { executeWithRetry } from "../retryExecutor.js";
 import type { ExecutionAction, TransitionDecisionHandler } from "../types.js";
 import type { GitHubClient } from "./githubClient.js";
@@ -11,6 +12,7 @@ export interface GitHubTransitionContext {
   repo: string;
   issueNumber: number;
   transitionLabels: string[];
+  idempotencyStore?: IdempotencyStore;
 }
 
 /**
@@ -23,6 +25,7 @@ export class GitHubTransitionHandler implements TransitionDecisionHandler {
   private readonly client: GitHubClient;
   private readonly context: GitHubTransitionContext;
   private readonly seenRequestIds: Set<string>;
+  private readonly idempotencyStore: IdempotencyStore;
 
   private async shouldSkipComment(issueRef: {
     owner: string;
@@ -46,6 +49,7 @@ export class GitHubTransitionHandler implements TransitionDecisionHandler {
     this.client = client;
     this.context = context;
     this.seenRequestIds = new Set<string>();
+    this.idempotencyStore = context.idempotencyStore ?? new InMemoryIdempotencyStore();
   }
 
   public async handle(action: ExecutionAction): Promise<void> {
@@ -54,6 +58,19 @@ export class GitHubTransitionHandler implements TransitionDecisionHandler {
     }
 
     if (this.seenRequestIds.has(action.requestId)) {
+      return;
+    }
+
+    const idempotencyKey = {
+      owner: this.context.owner,
+      repo: this.context.repo,
+      issueNumber: this.context.issueNumber,
+      kind: "transition" as const,
+      requestId: action.requestId
+    };
+
+    if (await this.idempotencyStore.isProcessed(idempotencyKey)) {
+      this.seenRequestIds.add(action.requestId);
       return;
     }
 
@@ -78,6 +95,7 @@ export class GitHubTransitionHandler implements TransitionDecisionHandler {
           },
           { classifyError: (error) => this.client.classifyError?.(error) }
         );
+        await this.idempotencyStore.markProcessed(idempotencyKey);
         this.seenRequestIds.add(action.requestId);
         return;
       }
@@ -108,6 +126,7 @@ export class GitHubTransitionHandler implements TransitionDecisionHandler {
         { classifyError: (error) => this.client.classifyError?.(error) }
       );
 
+      await this.idempotencyStore.markProcessed(idempotencyKey);
       this.seenRequestIds.add(action.requestId);
     } catch (error: unknown) {
       const classification = this.client.classifyError?.(error);

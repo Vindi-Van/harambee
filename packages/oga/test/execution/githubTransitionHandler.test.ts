@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { InMemoryIdempotencyStore } from "../../src/execution/idempotencyStore.js";
 import type { GitHubClient } from "../../src/execution/github/githubClient.js";
 import { GitHubExecutionError } from "../../src/execution/github/githubExecutionError.js";
 import { GitHubTransitionHandler } from "../../src/execution/github/githubTransitionHandler.js";
@@ -182,5 +183,41 @@ describe("GitHubTransitionHandler", () => {
     expect(client.createComment).not.toHaveBeenCalled();
     expect(client.addLabels).not.toHaveBeenCalled();
     expect(client.addAssignees).not.toHaveBeenCalled();
+  });
+
+  it("test_transition_shared_store_skips_repeat_across_handler_instances", async () => {
+    const client = createMockClient();
+    const idempotencyStore = new InMemoryIdempotencyStore();
+
+    const handlerA = new GitHubTransitionHandler(client, {
+      owner: "Vindi-Van",
+      repo: "harambee",
+      issueNumber: 131,
+      transitionLabels: ["stage:verification"],
+      idempotencyStore
+    });
+
+    const handlerB = new GitHubTransitionHandler(client, {
+      owner: "Vindi-Van",
+      repo: "harambee",
+      issueNumber: 131,
+      transitionLabels: ["stage:verification"],
+      idempotencyStore
+    });
+
+    await handlerA.handle({
+      kind: "transition",
+      requestId: "req-tr-7",
+      allowed: true
+    });
+
+    await handlerB.handle({
+      kind: "transition",
+      requestId: "req-tr-7",
+      allowed: true
+    });
+
+    expect(client.addLabels).toHaveBeenCalledTimes(1);
+    expect(client.createComment).toHaveBeenCalledTimes(1);
   });
 });
