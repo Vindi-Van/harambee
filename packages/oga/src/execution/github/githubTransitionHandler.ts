@@ -47,10 +47,22 @@ export class GitHubTransitionHandler implements TransitionDecisionHandler {
 
     try {
       if (!action.allowed) {
-        await this.client.createComment({
-          ...issueRef,
-          body: `Transition denied (requestId: ${action.requestId}). Reason: ${action.reason ?? "unknown"}`
-        });
+        await executeWithRetry(
+          async () => {
+            const alreadyCommented = await this.client.hasRequestComment?.({
+              ...issueRef,
+              requestId: action.requestId
+            });
+            if (alreadyCommented) {
+              return;
+            }
+            await this.client.createComment({
+              ...issueRef,
+              body: `Transition denied (requestId: ${action.requestId}). Reason: ${action.reason ?? "unknown"}`
+            });
+          },
+          { classifyError: (error) => this.client.classifyError?.(error) }
+        );
         this.seenRequestIds.add(action.requestId);
         return;
       }
@@ -69,6 +81,13 @@ export class GitHubTransitionHandler implements TransitionDecisionHandler {
 
       await executeWithRetry(
         async () => {
+          const alreadyCommented = await this.client.hasRequestComment?.({
+            ...issueRef,
+            requestId: action.requestId
+          });
+          if (alreadyCommented) {
+            return;
+          }
           await this.client.createComment({
             ...issueRef,
             body: `Transition applied (requestId: ${action.requestId}).`

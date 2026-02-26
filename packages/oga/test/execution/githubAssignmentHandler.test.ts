@@ -8,6 +8,7 @@ function createMockClient(): GitHubClient {
     addAssignees: vi.fn(async () => undefined),
     addLabels: vi.fn(async () => undefined),
     createComment: vi.fn(async () => undefined),
+    hasRequestComment: vi.fn(async () => false),
     classifyError: vi.fn(() => ({ retryable: false }))
   };
 }
@@ -126,5 +127,29 @@ describe("GitHubAssignmentHandler", () => {
       name: "GitHubExecutionError",
       retryable: false
     } satisfies Partial<GitHubExecutionError>);
+  });
+
+  it("test_assignment_skips_comment_when_request_comment_already_exists", async () => {
+    const client = createMockClient();
+    (client.hasRequestComment as any).mockResolvedValue(true);
+
+    const handler = new GitHubAssignmentHandler(client, {
+      owner: "Vindi-Van",
+      repo: "harambee",
+      issueNumber: 131,
+      assignees: ["matrim"],
+      labels: ["stage:execution"]
+    });
+
+    await handler.handle({
+      kind: "assignment",
+      requestId: "req-5",
+      allowed: true
+    });
+
+    expect(client.addAssignees).toHaveBeenCalledOnce();
+    expect(client.addLabels).toHaveBeenCalledOnce();
+    expect(client.hasRequestComment).toHaveBeenCalledOnce();
+    expect(client.createComment).not.toHaveBeenCalled();
   });
 });

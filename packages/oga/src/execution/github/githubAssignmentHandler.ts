@@ -48,10 +48,22 @@ export class GitHubAssignmentHandler implements AssignmentDecisionHandler {
 
     try {
       if (!action.allowed) {
-        await this.client.createComment({
-          ...issueRef,
-          body: `Assignment denied (requestId: ${action.requestId}). Reason: ${action.reason ?? "unknown"}`
-        });
+        await executeWithRetry(
+          async () => {
+            const alreadyCommented = await this.client.hasRequestComment?.({
+              ...issueRef,
+              requestId: action.requestId
+            });
+            if (alreadyCommented) {
+              return;
+            }
+            await this.client.createComment({
+              ...issueRef,
+              body: `Assignment denied (requestId: ${action.requestId}). Reason: ${action.reason ?? "unknown"}`
+            });
+          },
+          { classifyError: (error) => this.client.classifyError?.(error) }
+        );
         this.seenRequestIds.add(action.requestId);
         return;
       }
@@ -78,6 +90,13 @@ export class GitHubAssignmentHandler implements AssignmentDecisionHandler {
 
       await executeWithRetry(
         async () => {
+          const alreadyCommented = await this.client.hasRequestComment?.({
+            ...issueRef,
+            requestId: action.requestId
+          });
+          if (alreadyCommented) {
+            return;
+          }
           await this.client.createComment({
             ...issueRef,
             body: `Assignment applied (requestId: ${action.requestId}).`
