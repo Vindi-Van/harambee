@@ -67,7 +67,22 @@ gh repo view Vindi-Van/harambee
 - **GitHub Project board:** recommended to create early; can also be created by OgaArchitect/operator if permissions allow.
 - **Minimum viable start:** existing repo + issue/PR permissions.
 
-## 6) Confirm healthy operating state
+## 6) First 30 minutes (2 OpenClaw agents)
+
+If you already have 2 OpenClaw agents running:
+
+1. Assign roles:
+   - Agent A = OgaArchitect
+   - Agent B = Coding Agent
+2. Pick/create repo and verify GitHub auth is valid.
+3. OgaArchitect captures requirements and writes 1 epic + 3–5 tasks as GitHub issues.
+4. OgaArchitect requests architecture approval checkpoint.
+5. OgaArchitect assigns exactly 1 task to Coding Agent.
+6. Coding Agent implements, opens PR, links issue, adds test evidence.
+7. OgaArchitect/human reviews and merges if gate criteria pass.
+8. Close issue with PR/commit evidence and update project state.
+
+## 7) Confirm healthy operating state
 
 - No orphaned blocked tasks without owner
 - PRs linked to issue acceptance criteria
