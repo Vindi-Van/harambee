@@ -24,6 +24,24 @@ export class GitHubTransitionHandler implements TransitionDecisionHandler {
   private readonly context: GitHubTransitionContext;
   private readonly seenRequestIds: Set<string>;
 
+  private async shouldSkipComment(issueRef: {
+    owner: string;
+    repo: string;
+    issueNumber: number;
+  }, requestId: string): Promise<boolean> {
+    try {
+      const alreadyCommented =
+        (await this.client.hasRequestComment?.({
+          ...issueRef,
+          requestId
+        })) ?? false;
+      return alreadyCommented;
+    } catch {
+      // Fail-open: if comment lookup fails, continue and attempt createComment.
+      return false;
+    }
+  }
+
   constructor(client: GitHubClient, context: GitHubTransitionContext) {
     this.client = client;
     this.context = context;
@@ -47,10 +65,19 @@ export class GitHubTransitionHandler implements TransitionDecisionHandler {
 
     try {
       if (!action.allowed) {
-        await this.client.createComment({
-          ...issueRef,
-          body: `Transition denied (requestId: ${action.requestId}). Reason: ${action.reason ?? "unknown"}`
-        });
+        await executeWithRetry(
+          async () => {
+            const alreadyCommented = await this.shouldSkipComment(issueRef, action.requestId);
+            if (alreadyCommented) {
+              return;
+            }
+            await this.client.createComment({
+              ...issueRef,
+              body: `Transition denied (requestId: ${action.requestId}). Reason: ${action.reason ?? "unknown"}`
+            });
+          },
+          { classifyError: (error) => this.client.classifyError?.(error) }
+        );
         this.seenRequestIds.add(action.requestId);
         return;
       }
@@ -69,6 +96,10 @@ export class GitHubTransitionHandler implements TransitionDecisionHandler {
 
       await executeWithRetry(
         async () => {
+          const alreadyCommented = await this.shouldSkipComment(issueRef, action.requestId);
+          if (alreadyCommented) {
+            return;
+          }
           await this.client.createComment({
             ...issueRef,
             body: `Transition applied (requestId: ${action.requestId}).`

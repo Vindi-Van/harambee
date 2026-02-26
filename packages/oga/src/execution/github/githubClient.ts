@@ -3,6 +3,12 @@
  */
 export interface GitHubClient {
   classifyError?(error: unknown): { retryable: boolean; reason?: string; retryAfterMs?: number };
+  hasRequestComment?(params: {
+    owner: string;
+    repo: string;
+    issueNumber: number;
+    requestId: string;
+  }): Promise<boolean>;
   addAssignees(params: {
     owner: string;
     repo: string;

@@ -8,6 +8,7 @@ function createMockClient(): GitHubClient {
     addAssignees: vi.fn(async () => undefined),
     addLabels: vi.fn(async () => undefined),
     createComment: vi.fn(async () => undefined),
+    hasRequestComment: vi.fn(async () => false),
     classifyError: vi.fn(() => ({ retryable: false }))
   };
 }
@@ -120,5 +121,66 @@ describe("GitHubTransitionHandler", () => {
 
     expect(client.addLabels).toHaveBeenCalledTimes(2);
     sleep.mockRestore();
+  });
+
+  it("test_transition_skips_comment_when_request_comment_already_exists", async () => {
+    const client = createMockClient();
+    (client.hasRequestComment as any).mockResolvedValue(true);
+
+    const handler = new GitHubTransitionHandler(client, {
+      owner: "Vindi-Van",
+      repo: "harambee",
+      issueNumber: 129,
+      transitionLabels: ["stage:verification"]
+    });
+
+    await handler.handle({
+      kind: "transition",
+      requestId: "req-tr-5",
+      allowed: true
+    });
+
+    expect(client.addLabels).toHaveBeenCalledOnce();
+    expect(client.hasRequestComment).toHaveBeenCalledOnce();
+    expect(client.hasRequestComment).toHaveBeenCalledWith(
+      expect.objectContaining({
+        owner: "Vindi-Van",
+        repo: "harambee",
+        issueNumber: 129,
+        requestId: "req-tr-5"
+      })
+    );
+    expect(client.createComment).not.toHaveBeenCalled();
+  });
+
+  it("test_denied_transition_skips_comment_when_request_comment_already_exists", async () => {
+    const client = createMockClient();
+    (client.hasRequestComment as any).mockResolvedValue(true);
+
+    const handler = new GitHubTransitionHandler(client, {
+      owner: "Vindi-Van",
+      repo: "harambee",
+      issueNumber: 130,
+      transitionLabels: ["stage:verification"]
+    });
+
+    await handler.handle({
+      kind: "transition",
+      requestId: "req-tr-6",
+      allowed: false
+    });
+
+    expect(client.hasRequestComment).toHaveBeenCalledOnce();
+    expect(client.hasRequestComment).toHaveBeenCalledWith(
+      expect.objectContaining({
+        owner: "Vindi-Van",
+        repo: "harambee",
+        issueNumber: 130,
+        requestId: "req-tr-6"
+      })
+    );
+    expect(client.createComment).not.toHaveBeenCalled();
+    expect(client.addLabels).not.toHaveBeenCalled();
+    expect(client.addAssignees).not.toHaveBeenCalled();
   });
 });
