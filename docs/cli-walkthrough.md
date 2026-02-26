@@ -1,4 +1,4 @@
-# Harambee CLI Walkthrough (Day-0 / Day-1)
+# Harambee CLI Walkthrough (Setup + Daily Use)
 
 This walkthrough uses:
 - `gh` (GitHub CLI) for canonical workflow actions
@@ -23,7 +23,7 @@ This walkthrough uses:
 
 ---
 
-## B) Day-0 setup checks
+## B) Setup checks (one-time)
 
 ```bash
 # 1) Repo + deps
@@ -48,7 +48,7 @@ Expected:
 
 ---
 
-## C) Day-1 operating loop (single task)
+## C) Daily use loop (single task)
 
 ### Step 1: pick or create issue
 

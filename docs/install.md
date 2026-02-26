@@ -17,6 +17,8 @@
 
 ## GitHub requirements
 
+Harambee operations write to GitHub (issues, PRs, comments, labels, project updates), so authenticated GitHub access is a hard prerequisite.
+
 At minimum, operator credentials/bot token should be able to:
 - read/write Issues
 - read/write PRs and review comments
@@ -34,7 +36,18 @@ OpenClaw must have access to:
 - optional messaging surfaces (Telegram/Slack/etc.) for escalations
 - optional sub-agent spawning if a single instance plays multiple roles
 
-## 3) Repo setup
+## 3) Distribution model (today vs future)
+
+### Today (recommended)
+- Clone the GitHub repo and run from source.
+- Why: Harambee is currently workflow/framework-first, and GitHub is the canonical state plane.
+- This is the best current distribution mode for operators.
+
+### Future option
+- Publish a dedicated npm package/CLI once command surface is stabilized (e.g., `harambee init`, `harambee assign`, `harambee run`).
+- Packaging is feasible, but source-distribution is currently the canonical path.
+
+## 4) Repo setup
 
 ```bash
 git clone https://github.com/Vindi-Van/harambee.git
@@ -43,7 +56,7 @@ npm install
 npm run check
 ```
 
-## 4) Governance bootstrap checklist
+## 5) Governance bootstrap checklist
 
 Before running production-like orchestration:
 - [ ] Labels created per `docs/governance/labels.md`
@@ -52,7 +65,7 @@ Before running production-like orchestration:
 - [ ] PR policy aligned with `docs/governance/pr-approval-policy.md`
 - [ ] Role contracts acknowledged in `docs/contracts/`
 
-## 5) Does a GitHub Project need to exist?
+## 6) Does a GitHub Project need to exist?
 
 **Recommended, not strictly mandatory** for minimal operation.
 
@@ -61,7 +74,7 @@ Before running production-like orchestration:
 
 If running multiple agents and parallel tasks, a Project board is strongly advised.
 
-## 6) Can one OpenClaw instance play 2+ roles using subagents?
+## 7) Can one OpenClaw instance play 2+ roles using subagents?
 
 **Yes.**
 
@@ -76,7 +89,7 @@ Guardrails:
 - Keep assignment authority centralized in OgaArchitect flow
 - Preserve artifact-linked handoffs between roles
 
-## 7) Security baseline
+## 8) Security baseline
 
 - Principle of least privilege for tokens
 - Separate bot identities when possible (or separate role labels/scopes)

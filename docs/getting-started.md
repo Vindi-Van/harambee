@@ -18,11 +18,17 @@ Harambee is a **GitHub-native orchestration framework** where role-based agents 
 
 ## Fast path
 
-1. Clone repo and install deps
-2. Ensure GitHub auth is working (`gh auth status`)
-3. Create baseline labels/project workflow in GitHub (if not already present)
-4. Run first assignment flow using issue comments
-5. Validate PR + review + merge loop
+1. You have a project idea to build.
+2. Start Harambee with OgaArchitect (main role) and discuss requirements/features.
+3. OgaArchitect converts requirements into issue hierarchy (epics/stories/tasks) in GitHub.
+4. OgaArchitect requests architecture approval where required.
+5. OgaArchitect assigns execution tasks to worker roles.
+6. Workers implement via PRs, run review/QA gates, then merge.
+
+Under the hood prerequisites:
+- Clone repo and install deps
+- Ensure GitHub auth is working (`gh auth status`)
+- Create baseline labels/project workflow in GitHub (if not already present)
 
 ---
 
@@ -55,7 +61,13 @@ gh repo view Vindi-Van/harambee
 - Reviewer Worker / human reviews
 - Merge and log completion
 
-## 5) Confirm healthy operating state
+## 5) Can OgaArchitect create repo/project, or must they pre-exist?
+
+- **Repo:** can pre-exist (common) or be created by OgaArchitect/operator if permissions allow.
+- **GitHub Project board:** recommended to create early; can also be created by OgaArchitect/operator if permissions allow.
+- **Minimum viable start:** existing repo + issue/PR permissions.
+
+## 6) Confirm healthy operating state
 
 - No orphaned blocked tasks without owner
 - PRs linked to issue acceptance criteria
