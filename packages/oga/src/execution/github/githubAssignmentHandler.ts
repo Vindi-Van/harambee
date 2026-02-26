@@ -70,7 +70,8 @@ export class GitHubAssignmentHandler implements AssignmentDecisionHandler {
       requestId: action.requestId
     };
 
-    if (await this.idempotencyStore.isProcessed(idempotencyKey)) {
+    const shouldProcess = await this.idempotencyStore.tryMarkProcessed(idempotencyKey);
+    if (!shouldProcess) {
       this.seenRequestIds.add(action.requestId);
       return;
     }
@@ -96,7 +97,6 @@ export class GitHubAssignmentHandler implements AssignmentDecisionHandler {
           },
           { classifyError: (error) => this.client.classifyError?.(error) }
         );
-        await this.idempotencyStore.markProcessed(idempotencyKey);
         this.seenRequestIds.add(action.requestId);
         return;
       }
@@ -135,9 +135,9 @@ export class GitHubAssignmentHandler implements AssignmentDecisionHandler {
         { classifyError: (error) => this.client.classifyError?.(error) }
       );
 
-      await this.idempotencyStore.markProcessed(idempotencyKey);
       this.seenRequestIds.add(action.requestId);
     } catch (error: unknown) {
+      await this.idempotencyStore.clearProcessed(idempotencyKey).catch(() => undefined);
       const classification = this.client.classifyError?.(error);
       const retryable = classification?.retryable ?? false;
       throw new GitHubExecutionError(
