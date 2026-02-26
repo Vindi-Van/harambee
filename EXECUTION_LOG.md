@@ -11,3 +11,4 @@
 | 2026-02-25 15:17 | Part 2 runtime integration | Started runtimeBindings direct GitHub dispatcher integration slice | in-progress | implement + test + PR |
 | 2026-02-25 17:46 | Part 2 error classification | Started error classification + retry hook slice | in-progress | implement + tests + PR |
 | 2026-02-25 19:22 | Part 2 error classification | Added retryability-aware GitHub execution errors and client classification hook | local tests green (oga 19/19, policy 2/2) | commit + open PR |
+| 2026-02-25 20:18 | Part 2 retry scheduler | Started runtime retry/backoff hook slice | in-progress | implement scheduler + tests + PR |

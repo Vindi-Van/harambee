@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import type { GitHubClient } from "../../src/execution/github/githubClient.js";
 import { GitHubExecutionError } from "../../src/execution/github/githubExecutionError.js";
 import { GitHubTransitionHandler } from "../../src/execution/github/githubTransitionHandler.js";
@@ -13,6 +13,9 @@ function createMockClient(): GitHubClient {
 }
 
 describe("GitHubTransitionHandler", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
   it("test_allowed_transition_applies_github_mutations", async () => {
     const client = createMockClient();
     const handler = new GitHubTransitionHandler(client, {
@@ -69,7 +72,7 @@ describe("GitHubTransitionHandler", () => {
   it("test_transition_error_uses_retry_classifier", async () => {
     const client = createMockClient();
     (client.addLabels as any).mockRejectedValueOnce(new Error("rate limited"));
-    (client.classifyError as any).mockReturnValueOnce({ retryable: true });
+    (client.classifyError as any).mockReturnValueOnce({ retryable: false });
 
     const handler = new GitHubTransitionHandler(client, {
       owner: "Vindi-Van",
@@ -86,7 +89,36 @@ describe("GitHubTransitionHandler", () => {
       })
     ).rejects.toMatchObject({
       name: "GitHubExecutionError",
-      retryable: true
+      retryable: false
     } satisfies Partial<GitHubExecutionError>);
+  });
+
+  it("test_transition_retryable_error_retries_then_succeeds", async () => {
+    const client = createMockClient();
+    (client.addLabels as any)
+      .mockRejectedValueOnce(new Error("rate limited"))
+      .mockResolvedValueOnce(undefined);
+    (client.classifyError as any).mockReturnValue({ retryable: true });
+
+    const sleep = vi.spyOn(globalThis, "setTimeout").mockImplementation((fn: TimerHandler) => {
+      if (typeof fn === "function") fn();
+      return 0 as unknown as ReturnType<typeof setTimeout>;
+    });
+
+    const handler = new GitHubTransitionHandler(client, {
+      owner: "Vindi-Van",
+      repo: "harambee",
+      issueNumber: 128,
+      transitionLabels: ["stage:verification"]
+    });
+
+    await handler.handle({
+      kind: "transition",
+      requestId: "req-tr-4",
+      allowed: true
+    });
+
+    expect(client.addLabels).toHaveBeenCalledTimes(2);
+    sleep.mockRestore();
   });
 });
