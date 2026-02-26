@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
+import type { IdempotencyStore } from "../../src/execution/idempotencyStore.js";
 import { InMemoryIdempotencyStore } from "../../src/execution/idempotencyStore.js";
 import type { GitHubClient } from "../../src/execution/github/githubClient.js";
 import { GitHubExecutionError } from "../../src/execution/github/githubExecutionError.js";
@@ -219,5 +220,62 @@ describe("GitHubTransitionHandler", () => {
 
     expect(client.addLabels).toHaveBeenCalledTimes(1);
     expect(client.createComment).toHaveBeenCalledTimes(1);
+  });
+
+  it("test_transition_propagates_when_tryMarkProcessed_throws", async () => {
+    const client = createMockClient();
+    const idempotencyStore: IdempotencyStore = {
+      tryMarkProcessed: vi.fn(async () => {
+        throw new Error("store unavailable");
+      }),
+      clearProcessed: vi.fn(async () => undefined)
+    };
+
+    const handler = new GitHubTransitionHandler(client, {
+      owner: "Vindi-Van",
+      repo: "harambee",
+      issueNumber: 132,
+      transitionLabels: ["stage:verification"],
+      idempotencyStore
+    });
+
+    await expect(
+      handler.handle({
+        kind: "transition",
+        requestId: "req-tr-8",
+        allowed: true
+      })
+    ).rejects.toThrow("store unavailable");
+
+    expect(client.addLabels).not.toHaveBeenCalled();
+    expect(idempotencyStore.clearProcessed).not.toHaveBeenCalled();
+  });
+
+  it("test_transition_clears_claim_when_execution_fails", async () => {
+    const client = createMockClient();
+    (client.addLabels as any).mockRejectedValueOnce(new Error("boom"));
+
+    const idempotencyStore: IdempotencyStore = {
+      tryMarkProcessed: vi.fn(async () => true),
+      clearProcessed: vi.fn(async () => undefined)
+    };
+
+    const handler = new GitHubTransitionHandler(client, {
+      owner: "Vindi-Van",
+      repo: "harambee",
+      issueNumber: 133,
+      transitionLabels: ["stage:verification"],
+      idempotencyStore
+    });
+
+    await expect(
+      handler.handle({
+        kind: "transition",
+        requestId: "req-tr-9",
+        allowed: true
+      })
+    ).rejects.toMatchObject({ name: "GitHubExecutionError" });
+
+    expect(idempotencyStore.clearProcessed).toHaveBeenCalledOnce();
   });
 });

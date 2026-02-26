@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
+import type { IdempotencyStore } from "../../src/execution/idempotencyStore.js";
 import { InMemoryIdempotencyStore } from "../../src/execution/idempotencyStore.js";
 import { GitHubAssignmentHandler } from "../../src/execution/github/githubAssignmentHandler.js";
 import { GitHubExecutionError } from "../../src/execution/github/githubExecutionError.js";
@@ -231,5 +232,64 @@ describe("GitHubAssignmentHandler", () => {
     expect(client.addAssignees).toHaveBeenCalledTimes(1);
     expect(client.addLabels).toHaveBeenCalledTimes(1);
     expect(client.createComment).toHaveBeenCalledTimes(1);
+  });
+
+  it("test_assignment_propagates_when_tryMarkProcessed_throws", async () => {
+    const client = createMockClient();
+    const idempotencyStore: IdempotencyStore = {
+      tryMarkProcessed: vi.fn(async () => {
+        throw new Error("store unavailable");
+      }),
+      clearProcessed: vi.fn(async () => undefined)
+    };
+
+    const handler = new GitHubAssignmentHandler(client, {
+      owner: "Vindi-Van",
+      repo: "harambee",
+      issueNumber: 134,
+      assignees: ["matrim"],
+      labels: ["stage:execution"],
+      idempotencyStore
+    });
+
+    await expect(
+      handler.handle({
+        kind: "assignment",
+        requestId: "req-8",
+        allowed: true
+      })
+    ).rejects.toThrow("store unavailable");
+
+    expect(client.addAssignees).not.toHaveBeenCalled();
+    expect(idempotencyStore.clearProcessed).not.toHaveBeenCalled();
+  });
+
+  it("test_assignment_clears_claim_when_execution_fails", async () => {
+    const client = createMockClient();
+    (client.addAssignees as any).mockRejectedValueOnce(new Error("boom"));
+
+    const idempotencyStore: IdempotencyStore = {
+      tryMarkProcessed: vi.fn(async () => true),
+      clearProcessed: vi.fn(async () => undefined)
+    };
+
+    const handler = new GitHubAssignmentHandler(client, {
+      owner: "Vindi-Van",
+      repo: "harambee",
+      issueNumber: 135,
+      assignees: ["matrim"],
+      labels: ["stage:execution"],
+      idempotencyStore
+    });
+
+    await expect(
+      handler.handle({
+        kind: "assignment",
+        requestId: "req-9",
+        allowed: true
+      })
+    ).rejects.toMatchObject({ name: "GitHubExecutionError" });
+
+    expect(idempotencyStore.clearProcessed).toHaveBeenCalledOnce();
   });
 });
