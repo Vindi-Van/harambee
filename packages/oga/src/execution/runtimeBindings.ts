@@ -56,6 +56,5 @@ export async function processTransitionWithGitHub(
   input: TransitionAdapterInput
 ): Promise<void> {
   const dispatcher = createGitHubExecutionDispatcher(context);
-  // TODO: wrap GitHub dispatch path with retry scheduler for retryable GitHubExecutionError failures.
   await processTransition(runtime, dispatcher, input);
 }

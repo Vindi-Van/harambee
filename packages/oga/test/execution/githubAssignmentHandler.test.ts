@@ -1,16 +1,22 @@
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { GitHubAssignmentHandler } from "../../src/execution/github/githubAssignmentHandler.js";
+import { GitHubExecutionError } from "../../src/execution/github/githubExecutionError.js";
 import type { GitHubClient } from "../../src/execution/github/githubClient.js";
 
 function createMockClient(): GitHubClient {
   return {
     addAssignees: vi.fn(async () => undefined),
     addLabels: vi.fn(async () => undefined),
-    createComment: vi.fn(async () => undefined)
+    createComment: vi.fn(async () => undefined),
+    classifyError: vi.fn(() => ({ retryable: false }))
   };
 }
 
 describe("GitHubAssignmentHandler", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   it("test_allowed_assignment_applies_github_mutations", async () => {
     const client = createMockClient();
     const handler = new GitHubAssignmentHandler(client, {
@@ -64,5 +70,61 @@ describe("GitHubAssignmentHandler", () => {
         body: expect.stringContaining("policy denied")
       })
     );
+  });
+
+  it("test_assignment_retryable_error_retries_then_succeeds", async () => {
+    const client = createMockClient();
+    (client.addAssignees as any)
+      .mockRejectedValueOnce(new Error("rate limited"))
+      .mockResolvedValueOnce(undefined);
+    (client.classifyError as any).mockReturnValue({ retryable: true });
+
+    vi.spyOn(globalThis, "setTimeout").mockImplementation((fn: TimerHandler) => {
+      if (typeof fn === "function") fn();
+      return 0 as unknown as ReturnType<typeof setTimeout>;
+    });
+
+    const handler = new GitHubAssignmentHandler(client, {
+      owner: "Vindi-Van",
+      repo: "harambee",
+      issueNumber: 129,
+      assignees: ["matrim"],
+      labels: ["stage:execution"]
+    });
+
+    await handler.handle({
+      kind: "assignment",
+      requestId: "req-3",
+      allowed: true
+    });
+
+    expect(client.addAssignees).toHaveBeenCalledTimes(2);
+    expect(client.addLabels).toHaveBeenCalledOnce();
+    expect(client.createComment).toHaveBeenCalledOnce();
+  });
+
+  it("test_assignment_error_uses_retry_classifier", async () => {
+    const client = createMockClient();
+    (client.addAssignees as any).mockRejectedValueOnce(new Error("forbidden"));
+    (client.classifyError as any).mockReturnValueOnce({ retryable: false });
+
+    const handler = new GitHubAssignmentHandler(client, {
+      owner: "Vindi-Van",
+      repo: "harambee",
+      issueNumber: 130,
+      assignees: ["matrim"],
+      labels: ["stage:execution"]
+    });
+
+    await expect(
+      handler.handle({
+        kind: "assignment",
+        requestId: "req-4",
+        allowed: true
+      })
+    ).rejects.toMatchObject({
+      name: "GitHubExecutionError",
+      retryable: false
+    } satisfies Partial<GitHubExecutionError>);
   });
 });

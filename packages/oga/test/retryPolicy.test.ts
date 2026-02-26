@@ -1,7 +1,11 @@
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { defaultRetryPolicy, getRetryDecision } from "../src/execution/retryPolicy.js";
 
 describe("getRetryDecision", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   it("test_getRetryDecision_non_retryable_returns_false", () => {
     const result = getRetryDecision(1, false, defaultRetryPolicy);
     expect(result.shouldRetry).toBe(false);
