@@ -66,6 +66,32 @@ gh project view <number> --owner <owner> --format json
 
 Then copy IDs into repo variables.
 
+## Live Configuration Captured (Project #3, 2026-03-02)
+
+Project:
+- URL: <https://github.com/users/Vindi-Van/projects/3>
+- `PROJECT_V2_ID=PVT_kwHOA23KYM4BQmW3`
+- `PROJECT_V2_STATUS_FIELD_ID=PVTSSF_lAHOA23KYM4BQmW3zg-q_dk`
+
+Status options currently available in this project:
+- `Todo` -> `f75ad846`
+- `In progress` -> `47fc9ee4`
+- `Done` -> `98236657`
+
+Applied repo-variable mapping (compressed to current 3-state project schema):
+- `PROJECT_V2_OPT_INTAKE=f75ad846`
+- `PROJECT_V2_OPT_DESIGN=f75ad846`
+- `PROJECT_V2_OPT_REVIEW_GATE=f75ad846`
+- `PROJECT_V2_OPT_DECOMPOSITION=47fc9ee4`
+- `PROJECT_V2_OPT_EXECUTION=47fc9ee4`
+- `PROJECT_V2_OPT_VERIFICATION=47fc9ee4`
+- `PROJECT_V2_OPT_DEPLOYMENT=47fc9ee4`
+- `PROJECT_V2_OPT_BLOCKED=f75ad846`
+- `PROJECT_V2_OPT_DONE=98236657`
+
+Scope validation:
+- `gh auth status` reports active token scopes include `project`, `repo`, and `workflow`.
+
 ## Local Manual Sync Command
 
 ```bash
@@ -83,3 +109,8 @@ scripts/projectv2_sync.sh "$authority_repo" "$issue_number"
 4. Transition labels to `stage:execution`, then `stage:verification`, then close issue.
 5. Confirm project item status transitions: **Execution** -> **Verification** -> **Done**.
 6. Save command/run links in `docs/validation/m1-dry-run-validation-checklist.md`.
+
+Latest executed evidence:
+- Sample issue: <https://github.com/Vindi-Van/harambee/issues/77>
+- Command log: `docs/validation/artifacts/m1-projectv2-live-validation-2026-03-02.txt`
+- Observed statuses: `Todo -> In progress -> In progress -> Done`

@@ -24,6 +24,11 @@
   - `.github/workflows/projectv2-governance-sync.yml`
   - `scripts/projectv2_sync.sh`
   - `docs/governance/project-v2-automation.md`
+- Completed live Project v2 validation evidence run against <https://github.com/users/Vindi-Van/projects/3>:
+  - Created/ran sample issue lifecycle: #77 (Intake -> Execution -> Verification -> Done)
+  - Validated token scopes + discovered project/field/option IDs
+  - Set required repo variables for automation mapping
+  - Captured command/output evidence in `docs/validation/artifacts/m1-projectv2-live-validation-2026-03-02.txt`
 - Executed M2 OgaArchitect dispatch simulation evidence set:
   - Added test suite: `packages/oga/test/execution/m2DispatchSimulation.test.ts`
   - Added validation artifact: `docs/validation/m2-dispatch-simulation-checklist.md`
@@ -44,12 +49,12 @@
   - Ran full checks: `npm run check` (all workspaces passing)
 
 ## Active (In Progress)
-- Complete live Project v2 validation evidence run (one sample issue through mapped status transitions) after project IDs/options and token scopes are configured.
 - Optional M3 hardening: run the same contracts-in-practice scenario against a live GitHub issue/PR path and attach runtime links.
 
 ## Next
+- Optional Project v2 hardening: expand Status options from 3-state (`Todo/In progress/Done`) to full governance-state options and remap repo variables accordingly.
 - Optional M4 hardening: run same reclaim scenarios against live Redis + runtime telemetry sink and attach artifacts.
 - Optional hardening: dedicated discussion categories for dispatch/standup/escalation.
 
 ## Blocked
-- Project v2 live validation currently blocked by missing `read:project`/`project` token scope and unset repo variables for project/field/option IDs.
+- None.

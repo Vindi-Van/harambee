@@ -1,0 +1,28 @@
+$ gh auth status
+github.com
+  ✓ Logged in to github.com account matrim-mastermind (/home/matrim/.config/gh/hosts.yml)
+  - Active account: true
+  - Git operations protocol: https
+  - Token: gho_************************************
+  - Token scopes: 'gist', 'project', 'read:org', 'repo', 'workflow'
+
+  ✓ Logged in to github.com account matrim-bot (/home/matrim/.config/gh/hosts.yml)
+$ gh project view 3 --owner Vindi-Van --format json
+{
+  "id": "PVT_kwHOA23KYM4BQmW3",
+  "number": 3,
+  "title": "Harambee Project",
+  "url": "https://github.com/users/Vindi-Van/projects/3"
+}
+$ scripts/projectv2_sync.sh Vindi-Van/harambee 77   # intake
+synced Vindi-Van/harambee#77 -> intake (option f75ad846)
+status=Todo option=f75ad846
+$ gh issue edit 77 --remove-label stage:intake --add-label stage:execution
+synced Vindi-Van/harambee#77 -> execution (option 47fc9ee4)
+status=In progress option=47fc9ee4
+$ gh issue edit 77 --remove-label stage:execution --add-label stage:verification
+synced Vindi-Van/harambee#77 -> verification (option 47fc9ee4)
+status=In progress option=47fc9ee4
+$ gh issue close 77 --comment "Closing after Project v2 live validation run."
+synced Vindi-Van/harambee#77 -> done (option 98236657)
+status=Done option=98236657
