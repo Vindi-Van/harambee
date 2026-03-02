@@ -46,9 +46,15 @@ Optional repository secret:
 
 - `PROJECT_V2_TOKEN` (recommended PAT with `project` + `repo` scopes when project is org/user-scoped and `github.token` lacks access)
 
-## How to Fetch IDs (one-time)
+## Access Requirement (hard)
+
+Agents/operators must have access to:
+- the repository (for issues/labels/workflow updates), and
+- the GitHub Project v2 (for project item and status-field writes).
 
 `gh` must be authenticated with `read:project` (and `project` for writes).
+
+## How to Fetch IDs (one-time)
 
 ```bash
 # List projects for owner
