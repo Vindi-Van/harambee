@@ -17,18 +17,19 @@
 - Added discussion usage/fallback protocol:
   - `docs/protocols/discussion-template-usage.md`
 - Synced tracker state in `docs/task-tracker.md`.
+- Posted live discussion validation samples:
+  - Dispatch: <https://github.com/Vindi-Van/harambee/discussions/64>
+  - Standup: <https://github.com/Vindi-Van/harambee/discussions/65>
+  - Escalation: <https://github.com/Vindi-Van/harambee/discussions/66>
+- Marked M1 discussion validation complete in `docs/validation/m1-dry-run-validation-checklist.md`.
+- Closed M1 tracker status in `docs/task-tracker.md`.
 
 ## Active (In Progress)
-- M1 closeout is **ready to finalize**:
-  - Issue-template dry-run criterion is satisfied.
-  - Repo Discussions setting is enabled (`has_discussions=true`, GraphQL `hasDiscussionsEnabled=true`).
-  - Remaining action: post one sample discussion per template and link evidence.
+- M2 dispatch protocol simulation planning (next milestone).
 
 ## Next
-- Create/verify category mapping for dispatch/standup/escalation discussions.
-- Run one live sample discussion post per template (dispatch/standup/escalation).
-- Capture those links in `docs/validation/m1-dry-run-validation-checklist.md` to finalize M1 close.
-- Begin M2 dispatch protocol simulation.
+- Execute M2 dispatch protocol simulation with 3-task anti-collision evidence set.
+- Wire/verify Project v2 workflow automation mappings for documented governance states.
 
 ## Blocked
 - None.

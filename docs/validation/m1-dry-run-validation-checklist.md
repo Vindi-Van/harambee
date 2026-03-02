@@ -58,12 +58,23 @@ Current repo/API status observed during run:
   - [x] escalation
 - [x] Define minimum required fields for each discussion template.
 - [x] Add template files under `.github/DISCUSSION_TEMPLATE/`.
-- [ ] Validate one sample discussion post per template (repository setting prerequisite satisfied; sample-post evidence still pending).
+- [x] Validate one sample discussion post per template and record links.
 - [x] Record pass/fail and follow-up action.
 
+Live sample discussion evidence:
+- Dispatch: <https://github.com/Vindi-Van/harambee/discussions/64> (category: General)
+- Standup: <https://github.com/Vindi-Van/harambee/discussions/65> (category: Show and tell)
+- Escalation: <https://github.com/Vindi-Van/harambee/discussions/66> (category: Q&A)
+
+Category mapping used for M1 validation:
+- dispatch → General
+- standup → Show and tell
+- escalation → Q&A
+
+
 Follow-up action required:
-1. Create/verify category mapping.
-2. Post one sample discussion per template and record links.
+1. (Optional hardening) Create dedicated discussion categories for dispatch/standup/escalation to remove semantic ambiguity.
+2. Map workflow states into Project v2 automation.
 
 Interim replacement workflow (documented):
 - Use issue/discussion fallback protocol in `docs/protocols/discussion-template-usage.md` only if Discussions is later disabled or unavailable.
@@ -76,10 +87,10 @@ Interim replacement workflow (documented):
 - Validator: @matrim-mastermind
 - Samples executed: 4/4 required issue templates
 - Pass count: 4
-- Fail count: 0 (issue templates); 1 pending validation item (discussion live-post verification)
+- Fail count: 0
 - Open follow-ups:
-  - Create and verify GitHub Discussions categories and complete live discussion-post validation.
+  - Optional: create dedicated GitHub Discussions categories for dispatch/standup/escalation.
   - Map workflow states into Project v2 automation.
-- Recommendation: M1 exit **CONDITIONAL GO**
-  - GO for issue-template lifecycle criterion.
-  - Final closeout depends on discussion live-post validation per documented path.
+- Recommendation: M1 exit **GO**
+  - Issue-template lifecycle criterion is satisfied.
+  - Discussion live-post validation is satisfied (3/3 templates posted and linked).
