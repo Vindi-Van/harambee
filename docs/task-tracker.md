@@ -1,6 +1,6 @@
 # Harambee Task Tracker
 
-_Last updated: 2026-03-02 (M2 validated; M3 sample flow added; M4 Redis coordination planning started)_
+_Last updated: 2026-03-02 (M2 validated; M3 sample flow added; M4 Redis coordination simulation evidence completed)_
 
 This tracker records what is **done** vs **not done** by milestone and execution track.
 
@@ -12,7 +12,7 @@ This tracker records what is **done** vs **not done** by milestone and execution
 | M1 — Workflow Schema & Governance | In progress | Real dry-run executed: one sample issue each for task/bug/design/blocker (#58-#61), lifecycle transitions captured, validation checklist updated, discussion templates + usage protocol added, repo Discussions enabled (`has_discussions=true`, GraphQL `hasDiscussionsEnabled=true`), live sample discussions posted for dispatch/standup/escalation (#64-#66), and Project v2 automation workflow/script/docs added | Live project validation still blocked until project IDs/options are configured and a token with `read:project`/`project` scopes is available |
 | M2 — OgaArchitect Dispatch | Complete | Protocol docs + executable simulation evidence completed (`docs/protocols/assignment-flow.md`, `docs/validation/m2-dispatch-simulation-checklist.md`, `packages/oga/test/execution/m2DispatchSimulation.test.ts`) covering worker-ready/request-task, ack timeout requeue, reserved fix window enforcement, and 3-task anti-collision proof | Optional hardening: extend from policy-level simulation to GitHub issue/discussion live-fire replay artifacts |
 | M3 — Contracts in Practice | In progress | Sample end-to-end contracts flow executed with QA bounce-back simulation evidence (`docs/validation/m3-contracts-in-practice-sample-flow.md`) | Live GitHub runtime replay of the same M3 path still pending as optional hardening evidence |
-| M4 — Optional Redis Coordination | In progress | Redis coordination protocol draft + failure simulation checklist added (`docs/protocols/redis-coordination.md`, `docs/validation/m4-redis-failure-simulation-checklist.md`) | Executable failure simulation run (lease exclusivity, reclaim, retry-cap escalation) not yet produced |
+| M4 — Optional Redis Coordination | Complete | Redis coordination protocol + executable failure-mode simulation evidence completed (`docs/protocols/redis-coordination.md`, `docs/validation/m4-redis-failure-simulation-checklist.md`, `packages/oga/test/execution/m4RedisCoordinationSimulation.test.ts`) covering lease exclusivity, stale-worker reclaim/reassignment, reserved fix-window reclaim deferral, and retry-cap escalation to blocker | Optional hardening: run same reclaim scenarios against a live Redis instance with persisted telemetry export |
 | M5 — Starter Kit | Not started | None required yet | Reusable template + adoption proof (<1 day) not yet produced |
 
 ## Track-Level Status (Done vs Not Done)
@@ -53,9 +53,11 @@ This tracker records what is **done** vs **not done** by milestone and execution
 - ✅ Done
   - Runtime harness evidence path merged (Issue #52 closed).
   - M2 assignment simulation evidence + anti-collision proof set completed in `docs/validation/m2-dispatch-simulation-checklist.md` and `packages/oga/test/execution/m2DispatchSimulation.test.ts`.
+  - M4 Redis coordination failure-mode simulation evidence set completed in `docs/validation/m4-redis-failure-simulation-checklist.md` and `packages/oga/test/execution/m4RedisCoordinationSimulation.test.ts`.
 - ⏳ Not done
   - Optional live-fire GitHub replay evidence (beyond policy guard simulation).
   - M3 live GitHub replay evidence (optional hardening beyond current executable test-backed sample flow).
+  - Optional M4 hardening: execute same reclaim scenarios against live Redis + runtime telemetry sink.
 
 ## Source of Truth References
 - M1 dry-run issues: <https://github.com/Vindi-Van/harambee/issues/58>, <https://github.com/Vindi-Van/harambee/issues/59>, <https://github.com/Vindi-Van/harambee/issues/60>, <https://github.com/Vindi-Van/harambee/issues/61>
@@ -63,6 +65,7 @@ This tracker records what is **done** vs **not done** by milestone and execution
 - Validation checklist (M1): `docs/validation/m1-dry-run-validation-checklist.md`
 - Validation checklist (M2): `docs/validation/m2-dispatch-simulation-checklist.md`
 - Validation checklist (M3 sample flow): `docs/validation/m3-contracts-in-practice-sample-flow.md`
+- Validation checklist (M4): `docs/validation/m4-redis-failure-simulation-checklist.md`
 - Discussion usage protocol: `docs/protocols/discussion-template-usage.md`
 - Milestones: `docs/milestones.md`
 - Current board: `WORKBOARD.md`

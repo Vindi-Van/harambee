@@ -10,31 +10,40 @@ Purpose: demonstrate safe reassignment behavior with optional Redis coordination
 ## Test Matrix
 
 ### 1) Lease exclusivity (no double assignment)
-- [ ] Assign one task under contention from two workers.
-- [ ] Verify only one `lease:{taskId}` is accepted.
-- [ ] Capture logs proving CAS/token guard blocked duplicate lease.
+- [x] Assign one task under contention from two workers.
+- [x] Verify only one `lease:{taskId}` is accepted.
+- [x] Capture logs proving CAS/token guard blocked duplicate lease.
 
 ### 2) Heartbeat timeout reclaim
-- [ ] Assign task to worker A.
-- [ ] Stop heartbeat for worker A.
-- [ ] Wait for TTL + reclaim grace.
-- [ ] Verify task transitions `assigned -> reclaiming -> queued -> assigned(worker B)`.
-- [ ] Post/record reclaim evidence artifact.
+- [x] Assign task to worker A.
+- [x] Stop heartbeat for worker A.
+- [x] Wait for TTL + reclaim grace.
+- [x] Verify task transitions `assigned -> reclaiming -> queued -> assigned(worker B)`.
+- [x] Post/record reclaim evidence artifact.
 
 ### 3) Reserved fix window protection
-- [ ] Put task in active fix window state.
-- [ ] Simulate delayed heartbeat inside fix window.
-- [ ] Confirm reclaim is deferred until fix window expires.
+- [x] Put task in active fix window state.
+- [x] Simulate delayed heartbeat inside fix window.
+- [x] Confirm reclaim is deferred until fix window expires.
 
 ### 4) Retry cap and escalation
-- [ ] Force reclaim cycle to exceed `maxReclaimAttempts`.
-- [ ] Verify task escalates to blocker path (no infinite requeue loop).
+- [x] Force reclaim cycle to exceed `maxReclaimAttempts`.
+- [x] Verify task escalates to blocker path (no infinite requeue loop).
 
 ## Exit Evidence Required
-- [ ] Command/test output proving all 4 scenarios passed.
-- [ ] Linked artifact logs with timestamps and task IDs.
-- [ ] Tracker updates in `docs/task-tracker.md` and `WORKBOARD.md`.
+- [x] Command/test output proving all 4 scenarios passed.
+- [x] Linked artifact logs with timestamps and task IDs.
+- [x] Tracker updates in `docs/task-tracker.md` and `WORKBOARD.md`.
+
+## Executed Evidence
+- Artifact: `packages/oga/test/execution/m4RedisCoordinationSimulation.test.ts`
+- Command: `npm test -- --run test/execution/m4RedisCoordinationSimulation.test.ts` (from `packages/oga`)
+- Result: `✓ test/execution/m4RedisCoordinationSimulation.test.ts (4 tests)`
+- Scenario/task IDs in simulation log history:
+  - Lease exclusivity under contention: `task-701`
+  - Stale-worker reclaim + reassignment: `task-702`
+  - Reserved fix-window reclaim deferral: `task-703`
+  - Retry-cap escalation to blocker: `task-704`
 
 ## Status
-- Started (planning + protocol spec drafted).
-- Pending executable simulation implementation.
+- Complete: executable simulation implementation and evidence captured.

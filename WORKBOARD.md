@@ -34,16 +34,18 @@
   - Recorded QA bounce-back simulation evidence using policy/transition handler tests
   - Ran checks: `npm run check` + targeted OGA tests (14/14 passing)
 - Synced tracker state in `docs/task-tracker.md`.
+- Completed M4 optional Redis coordination simulation evidence:
+  - Added executable simulation suite: `packages/oga/test/execution/m4RedisCoordinationSimulation.test.ts`
+  - Updated validation checklist with run evidence: `docs/validation/m4-redis-failure-simulation-checklist.md`
+  - Verified scenarios: lease exclusivity, stale-worker reclaim/reassignment, fix-window reclaim deferral, retry-cap escalation to blocker
+  - Ran full checks: `npm run check` (all workspaces passing)
 
 ## Active (In Progress)
 - Complete live Project v2 validation evidence run (one sample issue through mapped status transitions) after project IDs/options and token scopes are configured.
 - Optional M3 hardening: run the same contracts-in-practice scenario against a live GitHub issue/PR path and attach runtime links.
-- Started M4 optional Redis coordination closeout planning:
-  - Added protocol draft: `docs/protocols/redis-coordination.md`
-  - Added failure simulation checklist: `docs/validation/m4-redis-failure-simulation-checklist.md`
 
 ## Next
-- Implement executable M4 simulation tests for lease exclusivity, stale-worker reclaim, and retry-cap escalation.
+- Optional M4 hardening: run same reclaim scenarios against live Redis + runtime telemetry sink and attach artifacts.
 - Optional hardening: dedicated discussion categories for dispatch/standup/escalation.
 
 ## Blocked
