@@ -16,7 +16,11 @@
 
 ## Next
 - Non-blocking hardening only:
-  - Optionally schedule periodic replay checks for M4 telemetry + M5 external adoption.
+  - Optional discussion category isolation hardening (manual UI path) beyond current fallback mapping.
+  - Optional incremental governance-state reporting refinements.
+
+## Recently Completed (Optional Backlog)
+- Added periodic replay-check operations runbook for M4 telemetry + M5 external adoption (cadence, commands, evidence template, escalation path): `docs/validation/m4-m5-periodic-replay-check-runbook.md`.
 
 ## Blocked
 - None.

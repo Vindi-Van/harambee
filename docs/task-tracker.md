@@ -1,6 +1,6 @@
 # Harambee Task Tracker
 
-_Last updated: 2026-03-02 (discussion-category hardening fallback + API blocker evidence)_
+_Last updated: 2026-03-02 (added periodic M4/M5 replay-check runbook)_
 
 This tracker records what is **done** vs **not done** by milestone and execution track.
 
@@ -63,6 +63,11 @@ This tracker records what is **done** vs **not done** by milestone and execution
     - `docs/validation/artifacts/m4-live-redis-telemetry-replay-2026-03-02.md`
     - `docs/validation/artifacts/m4-live-redis-telemetry-2026-03-02.jsonl`
 
+## Operational Continuity (Post-Closeout)
+- ✅ Done
+  - Periodic replay-check runbook added for M4 telemetry + M5 external adoption, including cadence, executable commands, evidence artifact template, and escalation path:
+    - `docs/validation/m4-m5-periodic-replay-check-runbook.md`
+
 ## Source of Truth References
 - M1 dry-run issues: <https://github.com/Vindi-Van/harambee/issues/58>, <https://github.com/Vindi-Van/harambee/issues/59>, <https://github.com/Vindi-Van/harambee/issues/60>, <https://github.com/Vindi-Van/harambee/issues/61>
 - M1 live discussion samples: <https://github.com/Vindi-Van/harambee/discussions/64>, <https://github.com/Vindi-Van/harambee/discussions/65>, <https://github.com/Vindi-Van/harambee/discussions/66>
@@ -83,5 +88,6 @@ This tracker records what is **done** vs **not done** by milestone and execution
 - M5 adoption guide (now includes executed proof): `docs/starter-kit/adoption-under-1-day.md`
 - M5 adoption executed artifact log: `docs/validation/artifacts/m5-adoption-live-proof-2026-03-02.txt`
 - M5 external replay artifact (issue/discussion/workflow links): `docs/validation/artifacts/m5-external-adoption-replay-2026-03-02.md`
+- M4/M5 periodic replay-check runbook: `docs/validation/m4-m5-periodic-replay-check-runbook.md`
 - Final status artifact: `docs/validation/project-status-2026-03-02.md`
 - Current board: `WORKBOARD.md`
