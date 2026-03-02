@@ -1,4 +1,5 @@
 title: "[Escalation] "
+category: "Q&A"
 labels: ["status:blocked", "priority:p0"]
 body:
   - type: textarea

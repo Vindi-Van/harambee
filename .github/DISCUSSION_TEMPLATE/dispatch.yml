@@ -1,4 +1,5 @@
 title: "[Dispatch] "
+category: "General"
 labels: ["stage:intake", "status:ready"]
 body:
   - type: textarea

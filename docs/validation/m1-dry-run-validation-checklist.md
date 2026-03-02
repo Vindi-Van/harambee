@@ -104,7 +104,7 @@ Category mapping used for M1 validation:
 
 
 Follow-up action required:
-1. (Optional hardening) Create dedicated discussion categories for dispatch/standup/escalation to remove semantic ambiguity.
+1. (Optional hardening, manual UI-only) Create dedicated discussion categories for dispatch/standup/escalation to remove semantic ambiguity. API provisioning is currently unavailable; fallback mapping is enforced in templates (see `docs/validation/artifacts/m1-discussion-category-hardening-2026-03-02.md`).
 2. (Optional hardening) Expand Project v2 Status field options to full governance granularity (Intake/Design/Review Gate/Decomposition/Execution/Verification/Deployment/Blocked/Done) to remove compressed 3-state mapping.
 
 Interim replacement workflow (documented):
@@ -120,7 +120,7 @@ Interim replacement workflow (documented):
 - Pass count: 4
 - Fail count: 0
 - Open follow-ups:
-  - Optional: create dedicated GitHub Discussions categories for dispatch/standup/escalation.
+  - Optional (manual UI-only): create dedicated GitHub Discussions categories for dispatch/standup/escalation if maintainers want category-level isolation beyond template-enforced fallback mapping.
   - Optional: expand Project v2 Status field options for full governance-state fidelity (currently validated with compressed 3-state mapping).
 - Recommendation: M1 exit **GO**
   - Issue-template lifecycle criterion is satisfied.

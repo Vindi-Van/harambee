@@ -1,4 +1,5 @@
 title: "[Standup] "
+category: "Show and tell"
 labels: ["status:in-progress"]
 body:
   - type: textarea

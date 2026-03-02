@@ -1,6 +1,6 @@
 # Harambee Task Tracker
 
-_Last updated: 2026-03-02 (post-completion consolidation + Project v2 governance-state hardening)_
+_Last updated: 2026-03-02 (discussion-category hardening fallback + API blocker evidence)_
 
 This tracker records what is **done** vs **not done** by milestone and execution track.
 
@@ -9,7 +9,7 @@ This tracker records what is **done** vs **not done** by milestone and execution
 | Milestone | Status | Done | Not Done / Remaining |
 | --- | --- | --- | --- |
 | M0 — Foundation Docs | In review | Architecture/docs baseline exists (`docs/architecture-v1.md`, `docs/milestones.md`, `docs/task-breakdown.md`, `docs/roles-and-contracts.md`, `docs/complexity-rubric.md`) | Explicit "human approval of v1 design baseline" not yet recorded in repo artifacts |
-| M1 — Workflow Schema & Governance | Complete | Real dry-run executed: one sample issue each for task/bug/design/blocker (#58-#61), lifecycle transitions captured, validation checklist updated, discussion templates + usage protocol added, repo Discussions enabled (`has_discussions=true`, GraphQL `hasDiscussionsEnabled=true`), live sample discussions posted for dispatch/standup/escalation (#64-#66), Project v2 automation workflow/script/docs added, live Project v2 validation issue run completed (#77) with command log artifact, and optional hardening delivered via full-granularity `Governance State` Project field + synced automation (`docs/validation/artifacts/m1-projectv2-governance-state-hardening-2026-03-02.md`) | Optional hardening remaining: dedicated Discussion categories for dispatch/standup/escalation |
+| M1 — Workflow Schema & Governance | Complete | Real dry-run executed: one sample issue each for task/bug/design/blocker (#58-#61), lifecycle transitions captured, validation checklist updated, discussion templates + usage protocol added, repo Discussions enabled (`has_discussions=true`, GraphQL `hasDiscussionsEnabled=true`), live sample discussions posted for dispatch/standup/escalation (#64-#66), Project v2 automation workflow/script/docs added, live Project v2 validation issue run completed (#77) with command log artifact, optional hardening delivered via full-granularity `Governance State` Project field + synced automation (`docs/validation/artifacts/m1-projectv2-governance-state-hardening-2026-03-02.md`), and discussion-template category mapping hardened with explicit fallback + API blocker evidence (`docs/validation/artifacts/m1-discussion-category-hardening-2026-03-02.md`) | Dedicated category creation remains manual UI-only unless/until GitHub exposes supported API mutation; fallback mapping is enforced in templates |
 | M2 — OgaArchitect Dispatch | Complete | Protocol docs + executable simulation evidence completed (`docs/protocols/assignment-flow.md`, `docs/validation/m2-dispatch-simulation-checklist.md`, `packages/oga/test/execution/m2DispatchSimulation.test.ts`) covering worker-ready/request-task, ack timeout requeue, reserved fix window enforcement, and 3-task anti-collision proof | Optional hardening: extend from policy-level simulation to GitHub issue/discussion live-fire replay artifacts |
 | M3 — Contracts in Practice | Complete | Sample end-to-end contracts flow executed with QA bounce-back simulation evidence (`docs/validation/m3-contracts-in-practice-sample-flow.md`) and optional hardening completed via live GitHub replay (`docs/validation/artifacts/m3-live-github-replay-2026-03-02.md`) | None blocking for M3 scope |
 | M4 — Optional Redis Coordination | Complete | Redis coordination protocol + executable failure-mode simulation evidence completed (`docs/protocols/redis-coordination.md`, `docs/validation/m4-redis-failure-simulation-checklist.md`, `packages/oga/test/execution/m4RedisCoordinationSimulation.test.ts`) plus runnable output artifacts (`docs/validation/artifacts/m4-redis-simulation-vitest-output.txt`, `docs/validation/artifacts/m4-full-check-output.txt`) covering lease exclusivity, stale-worker reclaim/reassignment, reserved fix-window reclaim deferral, and retry-cap escalation to blocker; optional hardening replay now captured with persisted telemetry export (`docs/validation/artifacts/m4-live-redis-telemetry-replay-2026-03-02.md`, `docs/validation/artifacts/m4-live-redis-telemetry-2026-03-02.jsonl`) | None blocking for M4 scope |
@@ -51,7 +51,7 @@ This tracker records what is **done** vs **not done** by milestone and execution
   - Discussion template files added: `.github/DISCUSSION_TEMPLATE/{dispatch,standup,escalation,config}.yml`.
   - Usage/fallback protocol added: `docs/protocols/discussion-template-usage.md`.
 - ⏳ Not done
-  - Optional hardening: create dedicated discussion categories for dispatch/standup/escalation (current M1 mapping uses default categories).
+  - Manual maintainer UI action only (optional): create dedicated discussion categories for dispatch/standup/escalation. API path is currently unavailable; enforced fallback mapping is in place and validated.
 
 ### Track D — Runtime/Execution Readiness
 - ✅ Done
@@ -70,6 +70,7 @@ This tracker records what is **done** vs **not done** by milestone and execution
 - Validation checklist (M1): `docs/validation/m1-dry-run-validation-checklist.md`
 - Validation artifact (M1 Project v2 live run): `docs/validation/artifacts/m1-projectv2-live-validation-2026-03-02.txt`
 - Validation artifact (M1 governance-state hardening): `docs/validation/artifacts/m1-projectv2-governance-state-hardening-2026-03-02.md`
+- Validation artifact (M1 discussion category fallback + API blocker): `docs/validation/artifacts/m1-discussion-category-hardening-2026-03-02.md`
 - Validation checklist (M2): `docs/validation/m2-dispatch-simulation-checklist.md`
 - Validation checklist (M3 sample flow): `docs/validation/m3-contracts-in-practice-sample-flow.md`
 - Validation artifact (M3 live GitHub replay): `docs/validation/artifacts/m3-live-github-replay-2026-03-02.md`
