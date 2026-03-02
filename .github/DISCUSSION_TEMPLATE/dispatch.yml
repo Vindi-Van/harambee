@@ -1,0 +1,29 @@
+title: "[Dispatch] "
+labels: ["stage:intake", "status:ready"]
+body:
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: What is the assignment outcome?
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope and constraints
+      description: Boundaries and non-goals.
+    validations:
+      required: true
+  - type: textarea
+    id: owner
+    attributes:
+      label: Owner and role
+      description: Who is executing and what role label applies?
+    validations:
+      required: true
+  - type: textarea
+    id: due
+    attributes:
+      label: Target window
+      description: Expected start/end or SLA.
