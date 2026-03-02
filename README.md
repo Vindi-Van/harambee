@@ -28,6 +28,8 @@ This repo currently contains the **v1 design docs** and execution plan for:
 - `docs/install.md` — Requirements, permissions, setup, and governance bootstrap
 - `docs/cli-walkthrough.md` — Setup + daily-use command walkthrough (`gh` + optional OpenClaw)
 - `docs/testing/smoke-test-two-agents.md` — Sandbox smoke-test runbook for 2 agents / 1 project
+- `docs/starter-kit/reusable-template.md` — portable starter-kit file set + bootstrap checklist
+- `docs/starter-kit/adoption-under-1-day.md` — timeboxed adoption proof skeleton for second projects
 - `docs/architecture.md` — System design and workflow model
 - `docs/milestones.md` — Milestones, phases, and delivery checkpoints
 - `docs/task-breakdown.md` — Actionable work packages
