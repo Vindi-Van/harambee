@@ -36,6 +36,9 @@
 - Synced tracker state in `docs/task-tracker.md`.
 - Completed M4 optional Redis coordination simulation evidence:
   - Added executable simulation suite: `packages/oga/test/execution/m4RedisCoordinationSimulation.test.ts`
+  - Captured runnable evidence output artifacts:
+    - `docs/validation/artifacts/m4-redis-simulation-vitest-output.txt`
+    - `docs/validation/artifacts/m4-full-check-output.txt`
   - Updated validation checklist with run evidence: `docs/validation/m4-redis-failure-simulation-checklist.md`
   - Verified scenarios: lease exclusivity, stale-worker reclaim/reassignment, fix-window reclaim deferral, retry-cap escalation to blocker
   - Ran full checks: `npm run check` (all workspaces passing)

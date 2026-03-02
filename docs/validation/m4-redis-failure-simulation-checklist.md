@@ -36,9 +36,13 @@ Purpose: demonstrate safe reassignment behavior with optional Redis coordination
 - [x] Tracker updates in `docs/task-tracker.md` and `WORKBOARD.md`.
 
 ## Executed Evidence
-- Artifact: `packages/oga/test/execution/m4RedisCoordinationSimulation.test.ts`
+- Simulation implementation artifact: `packages/oga/test/execution/m4RedisCoordinationSimulation.test.ts`
+- Runnable evidence output artifact: `docs/validation/artifacts/m4-redis-simulation-vitest-output.txt`
+- Workspace check artifact (build + all tests): `docs/validation/artifacts/m4-full-check-output.txt`
 - Command: `npm test -- --run test/execution/m4RedisCoordinationSimulation.test.ts` (from `packages/oga`)
 - Result: `✓ test/execution/m4RedisCoordinationSimulation.test.ts (4 tests)`
+- Full check command: `npm run check` (from repo root)
+- Full check result: all workspace builds/tests passing
 - Scenario/task IDs in simulation log history:
   - Lease exclusivity under contention: `task-701`
   - Stale-worker reclaim + reassignment: `task-702`
