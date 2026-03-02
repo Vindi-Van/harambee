@@ -82,4 +82,4 @@ Within 8 hours, a new repository can:
 
 M5 is considered complete when at least one second repository has a dated evidence bundle showing successful adoption in under one day.
 
-Current status: **Met via local sandbox executed proof (2026-03-02)**; **live external-repo replay remains optional hardening**.
+Current status: **Met via local sandbox executed proof (2026-03-02)** and **optional hardening completed via live external-repo replay** (`docs/validation/artifacts/m5-external-adoption-replay-2026-03-02.md`).

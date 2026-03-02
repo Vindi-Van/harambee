@@ -10,13 +10,16 @@
   - Updated guide with executed proof section: `docs/starter-kit/adoption-under-1-day.md`
   - Added timestamped command/evidence log: `docs/validation/artifacts/m5-adoption-live-proof-2026-03-02.txt`
   - Simulated fresh second-repo onboarding workspace: `.tmp/m5-adoption-sim-2026-03-02`
+- M5 optional hardening completed with live external-repo replay evidence:
+  - Validation artifact: `docs/validation/artifacts/m5-external-adoption-replay-2026-03-02.md`
+  - Live links include external issue/discussion/workflow run artifacts in `Vindi-Van/sandbox`
 - Open approved+clean backlog item merged: PR #46.
 
 ## Active (In Progress)
 - None blocking.
 
 ## Next
-- Optional hardening: replay M5 adoption proof in a live external GitHub repository and attach issue/discussion/workflow links.
+- Optional hardening completed: M5 adoption proof replayed in live external GitHub repo with linked issue/discussion/workflow artifacts (`docs/validation/artifacts/m5-external-adoption-replay-2026-03-02.md`).
 - Optional hardening: live M3 GitHub replay and live M4 Redis+telemetry replay.
 
 ## Blocked

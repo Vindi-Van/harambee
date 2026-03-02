@@ -1,6 +1,6 @@
 # Harambee Task Tracker
 
-_Last updated: 2026-03-02 (PRs #79/#80 merged; M5 local adoption proof executed with timestamped artifact)_
+_Last updated: 2026-03-02 (M5 live external-repo adoption replay completed with linked issue/discussion/workflow artifacts)_
 
 This tracker records what is **done** vs **not done** by milestone and execution track.
 
@@ -13,7 +13,7 @@ This tracker records what is **done** vs **not done** by milestone and execution
 | M2 — OgaArchitect Dispatch | Complete | Protocol docs + executable simulation evidence completed (`docs/protocols/assignment-flow.md`, `docs/validation/m2-dispatch-simulation-checklist.md`, `packages/oga/test/execution/m2DispatchSimulation.test.ts`) covering worker-ready/request-task, ack timeout requeue, reserved fix window enforcement, and 3-task anti-collision proof | Optional hardening: extend from policy-level simulation to GitHub issue/discussion live-fire replay artifacts |
 | M3 — Contracts in Practice | In progress | Sample end-to-end contracts flow executed with QA bounce-back simulation evidence (`docs/validation/m3-contracts-in-practice-sample-flow.md`) | Live GitHub runtime replay of the same M3 path still pending as optional hardening evidence |
 | M4 — Optional Redis Coordination | Complete | Redis coordination protocol + executable failure-mode simulation evidence completed (`docs/protocols/redis-coordination.md`, `docs/validation/m4-redis-failure-simulation-checklist.md`, `packages/oga/test/execution/m4RedisCoordinationSimulation.test.ts`) plus runnable output artifacts (`docs/validation/artifacts/m4-redis-simulation-vitest-output.txt`, `docs/validation/artifacts/m4-full-check-output.txt`) covering lease exclusivity, stale-worker reclaim/reassignment, reserved fix-window reclaim deferral, and retry-cap escalation to blocker | Optional hardening: run same reclaim scenarios against a live Redis instance with persisted telemetry export |
-| M5 — Starter Kit | Complete | Starter-kit bootstrap docs delivered and executed local second-project adoption proof completed in under one day, including timestamped command log and evidence artifacts (`docs/starter-kit/reusable-template.md`, `docs/starter-kit/adoption-under-1-day.md`, `docs/validation/artifacts/m5-adoption-live-proof-2026-03-02.txt`) | Optional hardening: replay same adoption flow in a live external GitHub repository and attach links |
+| M5 — Starter Kit | Complete | Starter-kit bootstrap docs delivered; local second-project adoption proof executed in under one day; optional hardening replay completed in live external repo with linked issue/discussion/workflow artifacts (`docs/starter-kit/reusable-template.md`, `docs/starter-kit/adoption-under-1-day.md`, `docs/validation/artifacts/m5-adoption-live-proof-2026-03-02.txt`, `docs/validation/artifacts/m5-external-adoption-replay-2026-03-02.md`) | None blocking for M5 |
 
 ## Track-Level Status (Done vs Not Done)
 
@@ -58,7 +58,6 @@ This tracker records what is **done** vs **not done** by milestone and execution
   - M2 assignment simulation evidence + anti-collision proof set completed in `docs/validation/m2-dispatch-simulation-checklist.md` and `packages/oga/test/execution/m2DispatchSimulation.test.ts`.
   - M4 Redis coordination failure-mode simulation evidence set completed in `docs/validation/m4-redis-failure-simulation-checklist.md` and `packages/oga/test/execution/m4RedisCoordinationSimulation.test.ts`.
 - ⏳ Not done
-  - Optional live-fire GitHub replay evidence (beyond policy guard simulation).
   - M3 live GitHub replay evidence (optional hardening beyond current executable test-backed sample flow).
   - Optional M4 hardening: execute same reclaim scenarios against live Redis + runtime telemetry sink.
 
@@ -76,4 +75,5 @@ This tracker records what is **done** vs **not done** by milestone and execution
 - M5 reusable template: `docs/starter-kit/reusable-template.md`
 - M5 adoption guide (now includes executed proof): `docs/starter-kit/adoption-under-1-day.md`
 - M5 adoption executed artifact log: `docs/validation/artifacts/m5-adoption-live-proof-2026-03-02.txt`
+- M5 external replay artifact (issue/discussion/workflow links): `docs/validation/artifacts/m5-external-adoption-replay-2026-03-02.md`
 - Current board: `WORKBOARD.md`
