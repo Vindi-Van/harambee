@@ -23,7 +23,7 @@
 
 ## Next
 - Optional hardening completed: M5 adoption proof replayed in live external GitHub repo with linked issue/discussion/workflow artifacts (`docs/validation/artifacts/m5-external-adoption-replay-2026-03-02.md`).
-- Optional hardening: live M4 Redis+telemetry replay.
+- Optional hardening completed: M4 Redis+telemetry replay artifact captured with persisted export (`docs/validation/artifacts/m4-live-redis-telemetry-replay-2026-03-02.md`, `docs/validation/artifacts/m4-live-redis-telemetry-2026-03-02.jsonl`).
 
 ## Blocked
 - None.

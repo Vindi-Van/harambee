@@ -51,3 +51,6 @@ Purpose: demonstrate safe reassignment behavior with optional Redis coordination
 
 ## Status
 - Complete: executable simulation implementation and evidence captured.
+- Optional hardening complete (closest-feasible run): persisted telemetry replay artifacts captured in:
+  - `docs/validation/artifacts/m4-live-redis-telemetry-replay-2026-03-02.md`
+  - `docs/validation/artifacts/m4-live-redis-telemetry-2026-03-02.jsonl`

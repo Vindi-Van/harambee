@@ -1,0 +1,14 @@
+{"ts":"2026-03-02T21:20:00.000Z","scenario":"lease_exclusivity","taskId":"task-701","worker":"worker-a","event":"lease_acquire","ok":true,"tokenPrefix":"task-701:worker-"}
+{"ts":"2026-03-02T21:20:00.000Z","scenario":"lease_exclusivity","taskId":"task-701","worker":"worker-b","event":"lease_acquire","ok":false,"reason":"duplicate_prevented"}
+{"ts":"2026-03-02T21:20:00.000Z","scenario":"lease_exclusivity","taskId":"task-702","worker":"worker-a","event":"lease_acquire","ok":true,"tokenPrefix":"task-702:worker-"}
+{"ts":"2026-03-02T21:20:50.000Z","scenario":"stale_reclaim","taskId":"task-702","event":"reclaimed","attempt":1}
+{"ts":"2026-03-02T21:20:50.000Z","scenario":"lease_exclusivity","taskId":"task-702","worker":"worker-b","event":"lease_acquire","ok":true,"tokenPrefix":"task-702:worker-"}
+{"ts":"2026-03-02T21:20:50.000Z","scenario":"lease_exclusivity","taskId":"task-703","worker":"worker-a","event":"lease_acquire","ok":true,"tokenPrefix":"task-703:worker-"}
+{"ts":"2026-03-02T21:21:40.000Z","scenario":"fix_window","taskId":"task-703","event":"reclaim_deferred","reason":"fix_window_active"}
+{"ts":"2026-03-02T21:21:40.000Z","scenario":"retry_cap","taskId":"task-703","event":"reclaimed","attempt":1}
+{"ts":"2026-03-02T21:21:40.000Z","scenario":"lease_exclusivity","taskId":"task-704","worker":"worker-a","event":"lease_acquire","ok":true,"tokenPrefix":"task-704:worker-"}
+{"ts":"2026-03-02T21:22:30.000Z","scenario":"retry_cap","taskId":"task-704","event":"reclaimed","attempt":1}
+{"ts":"2026-03-02T21:22:30.000Z","scenario":"lease_exclusivity","taskId":"task-704","worker":"worker-r0","event":"lease_acquire","ok":true,"tokenPrefix":"task-704:worker-"}
+{"ts":"2026-03-02T21:23:20.000Z","scenario":"retry_cap","taskId":"task-704","event":"reclaimed","attempt":2}
+{"ts":"2026-03-02T21:23:20.000Z","scenario":"lease_exclusivity","taskId":"task-704","worker":"worker-r1","event":"lease_acquire","ok":true,"tokenPrefix":"task-704:worker-"}
+{"ts":"2026-03-02T21:24:10.000Z","scenario":"retry_cap","taskId":"task-704","event":"escalated","attempt":3,"state":"blocker"}
