@@ -153,6 +153,7 @@ Project:
 
 Executed command transcript:
 - `docs/validation/artifacts/m1-projectv2-governance-state-hardening-2026-03-02.md`
+- `docs/validation/artifacts/m1-governance-reporting-refinement-2026-03-02.md`
 
 ## Local Manual Sync Command
 
@@ -162,6 +163,20 @@ authority_repo="Vindi-Van/harambee"
 issue_number="<issue-number>"
 scripts/projectv2_sync.sh "$authority_repo" "$issue_number"
 ```
+
+## Sync Report Output (incremental reporting hardening)
+
+`projectv2_sync.sh` now emits a single parseable summary line on success:
+
+```text
+sync_report repo=<owner/repo> issue=<n> governance_key=<intake|...|done|blocked> status_field_id=<field-id> status_option_id=<option-id> gov_field_updated=<true|false> gov_field_id=<field-id|unset> gov_option_id=<option-id|unset>
+```
+
+Field semantics:
+- `governance_key`: canonical lifecycle key selected from labels/state precedence.
+- `status_field_id` + `status_option_id`: coarse built-in `Status` update target.
+- `gov_field_updated`: whether full-granularity `Governance State` was actually written.
+- `gov_field_id` + `gov_option_id`: governance-field target IDs when configured (otherwise `unset`).
 
 ## Validation Protocol (minimum evidence)
 
