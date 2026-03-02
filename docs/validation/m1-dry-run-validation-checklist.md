@@ -78,8 +78,8 @@ Interim replacement workflow (documented):
 - Pass count: 4
 - Fail count: 0 (issue templates); 1 pending validation item (discussion live-post verification)
 - Open follow-ups:
-  - Enable and wire GitHub Discussions categories to complete live discussion-post validation.
+  - Create and verify GitHub Discussions categories and complete live discussion-post validation.
   - Map workflow states into Project v2 automation.
 - Recommendation: M1 exit **CONDITIONAL GO**
   - GO for issue-template lifecycle criterion.
-  - Final closeout depends on discussion enablement decision/validation per documented path.
+  - Final closeout depends on discussion live-post validation per documented path.

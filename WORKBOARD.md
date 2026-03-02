@@ -19,10 +19,10 @@
 - Synced tracker state in `docs/task-tracker.md`.
 
 ## Active (In Progress)
-- M1 closeout moved from **conditional** to **ready to finalize**:
+- M1 closeout is **ready to finalize**:
   - Issue-template dry-run criterion is satisfied.
-  - Repo Discussions setting is now enabled (`has_discussions=true`, GraphQL `hasDiscussionsEnabled=true`).
-  - Remaining action is operational validation (post one sample discussion per template).
+  - Repo Discussions setting is enabled (`has_discussions=true`, GraphQL `hasDiscussionsEnabled=true`).
+  - Remaining action: post one sample discussion per template and link evidence.
 
 ## Next
 - Create/verify category mapping for dispatch/standup/escalation discussions.
@@ -31,4 +31,4 @@
 - Begin M2 dispatch protocol simulation.
 
 ## Blocked
-- No current blockers from repository-level Discussions availability.
+- None.
