@@ -16,24 +16,24 @@
   - `.github/DISCUSSION_TEMPLATE/escalation.yml`
 - Added discussion usage/fallback protocol:
   - `docs/protocols/discussion-template-usage.md`
-- Synced tracker state in `docs/task-tracker.md`.
 - Posted live discussion validation samples:
   - Dispatch: <https://github.com/Vindi-Van/harambee/discussions/64>
   - Standup: <https://github.com/Vindi-Van/harambee/discussions/65>
   - Escalation: <https://github.com/Vindi-Van/harambee/discussions/66>
-- Marked M1 discussion validation complete in `docs/validation/m1-dry-run-validation-checklist.md`.
-- Closed M1 tracker status in `docs/task-tracker.md`.
 - Added Project v2 governance automation artifacts:
   - `.github/workflows/projectv2-governance-sync.yml`
   - `scripts/projectv2_sync.sh`
   - `docs/governance/project-v2-automation.md`
-- Updated M1 validation/tracker docs to reflect automation wiring + live validation blocker context.
+- Executed M2 OgaArchitect dispatch simulation evidence set:
+  - Added test suite: `packages/oga/test/execution/m2DispatchSimulation.test.ts`
+  - Added validation artifact: `docs/validation/m2-dispatch-simulation-checklist.md`
+  - Verified protocol flows: worker-ready/request-task, assignment ack-timeout requeue, reserved fix window enforcement, 3-task no-collision proof
 - Started M3 Contracts-in-Practice flow with sample end-to-end evidence:
   - Added `docs/validation/m3-contracts-in-practice-sample-flow.md`
   - Applied UI/Coding/Reviewer/QA/DevOps contract checklists to a single feature path
   - Recorded QA bounce-back simulation evidence using policy/transition handler tests
   - Ran checks: `npm run check` + targeted OGA tests (14/14 passing)
-- Synced M3 status updates in `docs/task-tracker.md` (Not started → In progress).
+- Synced tracker state in `docs/task-tracker.md`.
 
 ## Active (In Progress)
 - Complete live Project v2 validation evidence run (one sample issue through mapped status transitions) after project IDs/options and token scopes are configured.
@@ -41,7 +41,7 @@
 
 ## Next
 - Optional hardening: dedicated discussion categories for dispatch/standup/escalation.
-- Begin M2 OgaArchitect dispatch simulation (3-task collision-free assignment evidence set).
+- Begin next unfinished milestone backlog item (M4 optional Redis coordination simulation) once M2/M3 closeout is merged.
 
 ## Blocked
 - Project v2 live validation currently blocked by missing `read:project`/`project` token scope and unset repo variables for project/field/option IDs.
