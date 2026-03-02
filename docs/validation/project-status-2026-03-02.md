@@ -32,7 +32,7 @@ Harambee milestone delivery is functionally complete through M5, including optio
 
 ## Optional Remaining Hardening (Non-Blocking)
 1. Expand Project v2 status field from compressed 3-state mapping to full governance-state granularity.
-2. Add dedicated GitHub Discussion categories for dispatch/standup/escalation to reduce template fallback dependence.
+2. (Manual UI-only) Add dedicated GitHub Discussion categories for dispatch/standup/escalation if maintainers want isolation beyond template-enforced fallback mapping; API blocker evidence: `docs/validation/artifacts/m1-discussion-category-hardening-2026-03-02.md`.
 3. Add one periodic replay cadence (e.g., monthly) for M4 telemetry export and M5 external adoption smoke validation.
 
 ## Final State
