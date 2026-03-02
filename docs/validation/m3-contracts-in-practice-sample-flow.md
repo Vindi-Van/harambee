@@ -119,8 +119,8 @@ Outcome: **QA bounce-back loop validated with executable evidence**.
 
 ## Risk Callouts
 
-- This run uses executable policy/handler tests as the end-to-end evidence path rather than a live GitHub issue mutation run.
-- Live GitHub environment validation can be added later as hardening (similar to M1 live samples).
+- This run uses executable policy/handler tests as the primary end-to-end evidence path.
+- Optional hardening was subsequently completed via live GitHub replay artifact: `docs/validation/artifacts/m3-live-github-replay-2026-03-02.md`.
 
 ---
 
