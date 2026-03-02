@@ -25,7 +25,9 @@ Discussion-template path addressed in this run:
 
 - [x] Labels in `docs/governance/labels.md` are now available in repo labels.
   - Evidence: labels created via `gh label create` set (all governance families present).
-- [ ] Workflow states in Project v2 are mapped (still pending; out of this run’s scope).
+- [~] Workflow states in Project v2 are mapped via automation artifacts, but live run evidence is pending project scope/config.
+  - Added: `.github/workflows/projectv2-governance-sync.yml`, `scripts/projectv2_sync.sh`, `docs/governance/project-v2-automation.md`
+  - Blocker: current local `gh` token lacks `read:project`/`project` scopes; repo vars for project/field/option IDs are unset.
 - [x] Transition gate requirements from `docs/governance/transition-gates.md` were used as dry-run gate reference.
 
 ---
@@ -74,7 +76,7 @@ Category mapping used for M1 validation:
 
 Follow-up action required:
 1. (Optional hardening) Create dedicated discussion categories for dispatch/standup/escalation to remove semantic ambiguity.
-2. Map workflow states into Project v2 automation.
+2. Complete live Project v2 validation run after setting project IDs/options + token scopes (see `docs/governance/project-v2-automation.md`).
 
 Interim replacement workflow (documented):
 - Use issue/discussion fallback protocol in `docs/protocols/discussion-template-usage.md` only if Discussions is later disabled or unavailable.

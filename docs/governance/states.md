@@ -25,6 +25,8 @@ Use **Status** as the canonical project field for board columns.
 | Done | `stage:deployment` + `status:done` | Completed with evidence |
 | Blocked | any + `status:blocked` | Delivery blocked pending unblock action |
 
+Automation wiring reference: `docs/governance/project-v2-automation.md`
+
 ## State Rules
 - Exactly one `stage:*` label at a time.
 - Task cannot advance if required artifacts are missing.
