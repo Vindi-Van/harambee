@@ -14,13 +14,16 @@
   - Validation artifact: `docs/validation/artifacts/m5-external-adoption-replay-2026-03-02.md`
   - Live links include external issue/discussion/workflow run artifacts in `Vindi-Van/sandbox`
 - Open approved+clean backlog item merged: PR #46.
+- M3 optional hardening completed with live GitHub replay evidence:
+  - Validation artifact: `docs/validation/artifacts/m3-live-github-replay-2026-03-02.md`
+  - Live links include execution/verification/QA-fail→QA-pass/done workflow run artifacts in `Vindi-Van/sandbox` (issue #3).
 
 ## Active (In Progress)
 - None blocking.
 
 ## Next
 - Optional hardening completed: M5 adoption proof replayed in live external GitHub repo with linked issue/discussion/workflow artifacts (`docs/validation/artifacts/m5-external-adoption-replay-2026-03-02.md`).
-- Optional hardening: live M3 GitHub replay and live M4 Redis+telemetry replay.
+- Optional hardening: live M4 Redis+telemetry replay.
 
 ## Blocked
 - None.
