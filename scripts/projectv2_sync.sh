@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Sync a GitHub issue's governance labels to a Project v2 Status field.
+# Sync a GitHub issue's governance labels to Project v2 fields.
 #
 # Required env:
 #   PROJECT_V2_ID
@@ -15,6 +15,18 @@ set -euo pipefail
 #   PROJECT_V2_OPT_DEPLOYMENT
 #   PROJECT_V2_OPT_DONE
 #   PROJECT_V2_OPT_BLOCKED
+#
+# Optional (full-granularity governance mirror field):
+#   PROJECT_V2_GOV_FIELD_ID
+#   PROJECT_V2_GOV_OPT_INTAKE
+#   PROJECT_V2_GOV_OPT_DESIGN
+#   PROJECT_V2_GOV_OPT_REVIEW_GATE
+#   PROJECT_V2_GOV_OPT_DECOMPOSITION
+#   PROJECT_V2_GOV_OPT_EXECUTION
+#   PROJECT_V2_GOV_OPT_VERIFICATION
+#   PROJECT_V2_GOV_OPT_DEPLOYMENT
+#   PROJECT_V2_GOV_OPT_DONE
+#   PROJECT_V2_GOV_OPT_BLOCKED
 #
 # Usage:
 #   scripts/projectv2_sync.sh <owner/repo> <issue_number>
@@ -79,15 +91,15 @@ elif has_label "stage:intake"; then
 fi
 
 case "$target_key" in
-  intake) option_id="$PROJECT_V2_OPT_INTAKE" ;;
-  design) option_id="$PROJECT_V2_OPT_DESIGN" ;;
-  review_gate) option_id="$PROJECT_V2_OPT_REVIEW_GATE" ;;
-  decomposition) option_id="$PROJECT_V2_OPT_DECOMPOSITION" ;;
-  execution) option_id="$PROJECT_V2_OPT_EXECUTION" ;;
-  verification) option_id="$PROJECT_V2_OPT_VERIFICATION" ;;
-  deployment) option_id="$PROJECT_V2_OPT_DEPLOYMENT" ;;
-  done) option_id="$PROJECT_V2_OPT_DONE" ;;
-  blocked) option_id="$PROJECT_V2_OPT_BLOCKED" ;;
+  intake) status_option_id="$PROJECT_V2_OPT_INTAKE" ;;
+  design) status_option_id="$PROJECT_V2_OPT_DESIGN" ;;
+  review_gate) status_option_id="$PROJECT_V2_OPT_REVIEW_GATE" ;;
+  decomposition) status_option_id="$PROJECT_V2_OPT_DECOMPOSITION" ;;
+  execution) status_option_id="$PROJECT_V2_OPT_EXECUTION" ;;
+  verification) status_option_id="$PROJECT_V2_OPT_VERIFICATION" ;;
+  deployment) status_option_id="$PROJECT_V2_OPT_DEPLOYMENT" ;;
+  done) status_option_id="$PROJECT_V2_OPT_DONE" ;;
+  blocked) status_option_id="$PROJECT_V2_OPT_BLOCKED" ;;
   *)
     echo "unknown target key: $target_key" >&2
     exit 2
@@ -119,11 +131,39 @@ if [[ -z "$item_id" || "$item_id" == "null" ]]; then
   exit 1
 fi
 
-gh api graphql \
-  -f query='mutation($project:ID!, $item:ID!, $field:ID!, $option:String!) { updateProjectV2ItemFieldValue(input:{ projectId:$project, itemId:$item, fieldId:$field, value:{ singleSelectOptionId:$option } }) { projectV2Item { id } } }' \
-  -f project="$PROJECT_V2_ID" \
-  -f item="$item_id" \
-  -f field="$PROJECT_V2_STATUS_FIELD_ID" \
-  -f option="$option_id" >/dev/null
+update_single_select_field() {
+  local field_id="$1"
+  local option_id="$2"
 
-echo "synced ${REPO}#${ISSUE_NUMBER} -> ${target_key} (option ${option_id})"
+  gh api graphql \
+    -f query='mutation($project:ID!, $item:ID!, $field:ID!, $option:String!) { updateProjectV2ItemFieldValue(input:{ projectId:$project, itemId:$item, fieldId:$field, value:{ singleSelectOptionId:$option } }) { projectV2Item { id } } }' \
+    -f project="$PROJECT_V2_ID" \
+    -f item="$item_id" \
+    -f field="$field_id" \
+    -f option="$option_id" >/dev/null
+}
+
+update_single_select_field "$PROJECT_V2_STATUS_FIELD_ID" "$status_option_id"
+
+# Optional: mirror full governance lifecycle in dedicated field when configured.
+if [[ -n "${PROJECT_V2_GOV_FIELD_ID:-}" ]]; then
+  case "$target_key" in
+    intake) gov_option_id="${PROJECT_V2_GOV_OPT_INTAKE:-}" ;;
+    design) gov_option_id="${PROJECT_V2_GOV_OPT_DESIGN:-}" ;;
+    review_gate) gov_option_id="${PROJECT_V2_GOV_OPT_REVIEW_GATE:-}" ;;
+    decomposition) gov_option_id="${PROJECT_V2_GOV_OPT_DECOMPOSITION:-}" ;;
+    execution) gov_option_id="${PROJECT_V2_GOV_OPT_EXECUTION:-}" ;;
+    verification) gov_option_id="${PROJECT_V2_GOV_OPT_VERIFICATION:-}" ;;
+    deployment) gov_option_id="${PROJECT_V2_GOV_OPT_DEPLOYMENT:-}" ;;
+    done) gov_option_id="${PROJECT_V2_GOV_OPT_DONE:-}" ;;
+    blocked) gov_option_id="${PROJECT_V2_GOV_OPT_BLOCKED:-}" ;;
+  esac
+
+  if [[ -z "${gov_option_id:-}" ]]; then
+    echo "warning: governance field enabled but missing option id for ${target_key}; skipping governance-state update" >&2
+  else
+    update_single_select_field "$PROJECT_V2_GOV_FIELD_ID" "$gov_option_id"
+  fi
+fi
+
+echo "synced ${REPO}#${ISSUE_NUMBER} -> ${target_key} (status option ${status_option_id})"
