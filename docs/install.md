@@ -71,12 +71,17 @@ Before running production-like orchestration:
 
 ## 6) Does a GitHub Project need to exist?
 
-**Recommended, not strictly mandatory** for minimal operation.
+**Yes for full Harambee operation.**
 
-- Minimal mode: Issues + labels + PRs only
-- Full mode (recommended): GitHub Project/Kanban tracks stage state and improves visibility/coordination
+- Minimal mode can run on Issues + labels + PRs only, but this is limited and not the target operating mode.
+- Full mode requires a GitHub Project v2 to track stage/status state and support automation.
 
-If running multiple agents and parallel tasks, a Project board is strongly advised.
+For production multi-agent operation, treat Project v2 as a hard requirement.
+
+### Access requirement (hard)
+Agents/operators must have access to **both**:
+1. the repository (`repo` operations), and
+2. the GitHub Project (`read:project` + `project` scopes for read/write state sync).
 
 ## 7) Can one OpenClaw instance play 2+ roles using subagents?
 
