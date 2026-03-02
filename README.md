@@ -38,6 +38,24 @@ This repo currently contains the **v1 design docs** and execution plan for:
 - `config/policy.example.yaml` — Configurable workflow/policy controls
 - `CONTEXT.md` / `CHANGELOG.md` — architecture decision log and change history
 
+## CLI Init (Current)
+
+Install and run the CLI:
+
+```bash
+npm install
+npm run build
+node packages/cli/dist/index.js init
+```
+
+Command usage:
+
+```bash
+harambee init [--allow-oga-override]
+```
+
+`--allow-oga-override` bypasses the single-active-Oga guard. Use it **only** with explicit owner approval.
+
 ## Immediate Next Step
 
 Approve v1 docs, then start implementation with:
