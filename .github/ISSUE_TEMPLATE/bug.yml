@@ -1,0 +1,56 @@
+name: Bug Task
+about: Report a defect and route it through Harambee execution
+title: "[Bug] "
+labels: ["stage:intake", "status:ready", "type:bug", "priority:p1"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Bug Summary
+      description: What is broken and what is the impact?
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction Steps
+      description: Exact steps to reproduce (include environment).
+      placeholder: |
+        1. Go to...
+        2. Click...
+        3. Observe...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-actual
+    attributes:
+      label: Expected vs Actual
+      description: Describe expected behavior and actual behavior.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - "P0 - blocking/core failure"
+        - "P1 - major feature degraded"
+        - "P2 - minor issue/workaround exists"
+        - "P3 - cosmetic"
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Link logs, screenshots, videos, test output, Sentry traces, etc.
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Suspected Scope / Affected Components
+      description: Components, services, or files likely involved.

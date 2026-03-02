@@ -1,0 +1,23 @@
+title: "[Standup] "
+category: "Show and tell"
+labels: ["status:in-progress"]
+body:
+  - type: textarea
+    id: yesterday
+    attributes:
+      label: Completed since last update
+    validations:
+      required: true
+  - type: textarea
+    id: today
+    attributes:
+      label: Next planned actions
+    validations:
+      required: true
+  - type: textarea
+    id: blockers
+    attributes:
+      label: Blockers or risks
+      description: Include issue links and unblock asks.
+    validations:
+      required: true

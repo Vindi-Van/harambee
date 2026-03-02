@@ -9,6 +9,7 @@ A GitHub-native community orchestration framework where specialized agents colla
 This repo currently contains the **v1 design docs** and execution plan for:
 - OgaArchitect-led orchestration (combined Oga + Architect role)
 - GitHub-first canonical workflow (Issues/PRs/Projects/Discussions)
+  - Full capability requires repository Discussions enabled (dispatch/standup/escalation workflows)
 - Role contracts and handoff gates
 - Complexity rubric (1–5)
 - Reserved fix windows after stage handoff
@@ -23,12 +24,40 @@ This repo currently contains the **v1 design docs** and execution plan for:
 
 ## Docs Index
 
+- `docs/getting-started.md` — 10-minute operator quickstart
+- `docs/install.md` — Requirements, permissions, setup, and governance bootstrap
+- `docs/cli-walkthrough.md` — Setup + daily-use command walkthrough (`gh` + optional OpenClaw)
+- `docs/testing/smoke-test-two-agents.md` — Sandbox smoke-test runbook for 2 agents / 1 project
+- `docs/starter-kit/reusable-template.md` — portable starter-kit file set + bootstrap checklist
+- `docs/starter-kit/adoption-under-1-day.md` — timeboxed adoption proof skeleton for second projects
 - `docs/architecture.md` — System design and workflow model
 - `docs/milestones.md` — Milestones, phases, and delivery checkpoints
 - `docs/task-breakdown.md` — Actionable work packages
 - `docs/contracts/` — Role contracts (including Reviewer Worker)
-- `docs/governance/` — Labels, states, and transition gate definitions
+- `docs/governance/` — Labels, states, transition gates, PR approval policy, and standards
+- `docs/protocols/` — Assignment, discussion, and agent onboarding protocols
+- `docs/pilots/` — End-to-end pilot execution examples
 - `docs/rubrics/complexity.md` — Complexity scoring system
+- `config/policy.example.yaml` — Configurable workflow/policy controls
+- `CONTEXT.md` / `CHANGELOG.md` — architecture decision log and change history
+
+## CLI Init (Current)
+
+Install and run the CLI:
+
+```bash
+npm install
+npm run build
+node packages/cli/dist/index.js init
+```
+
+Command usage:
+
+```bash
+harambee init [--allow-oga-override]
+```
+
+`--allow-oga-override` bypasses the single-active-Oga guard. Use it **only** with explicit owner approval.
 
 ## Immediate Next Step
 

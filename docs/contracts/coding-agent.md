@@ -6,6 +6,11 @@ Implement approved task scope with maintainable code quality and test coverage.
 ## Constraint
 Coding Agent cannot self-approve its own PR. Peer review is required by Reviewer Worker and/or OgaArchitect.
 
+Coding Agent is a main role agent. It may spawn subagents for bounded implementation tasks, but remains responsible for:
+- scope compliance
+- artifact quality
+- canonical GitHub updates
+
 ## Responsibilities
 - implement according to accepted UI/architecture inputs
 - write/update tests

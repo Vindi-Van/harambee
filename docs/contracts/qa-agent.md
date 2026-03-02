@@ -9,6 +9,8 @@ Validate behavior, correctness, and edge-case resilience before release.
 - run scenario and edge-case checks
 - reject with actionable defect bundle when needed
 
+QA Agent is a main role agent. It may spawn subagents for test execution fan-out, but QA Agent remains accountable for final pass/fail decision and evidence roll-up.
+
 ## Required Artifacts
 - verification checklist
 - test result evidence

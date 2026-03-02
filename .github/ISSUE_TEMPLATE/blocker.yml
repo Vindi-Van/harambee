@@ -1,0 +1,57 @@
+name: Blocker
+about: Escalate a workflow blocker requiring unblocking decision/action
+title: "[Blocker] "
+labels: ["status:blocked", "type:blocker", "priority:p0"]
+body:
+  - type: input
+    id: blocked-item
+    attributes:
+      label: Blocked Item
+      description: Issue/PR/task currently blocked.
+      placeholder: "#123 / PR #45"
+    validations:
+      required: true
+
+  - type: textarea
+    id: blocker-description
+    attributes:
+      label: Blocker Description
+      description: What is blocked, why, and what is the impact on delivery?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: blocker-type
+    attributes:
+      label: Blocker Type
+      options:
+        - "Dependency missing"
+        - "Decision needed"
+        - "Access/permission issue"
+        - "Environment/tooling failure"
+        - "Policy/process conflict"
+        - "External waiting"
+    validations:
+      required: true
+
+  - type: textarea
+    id: attempted-remediation
+    attributes:
+      label: Attempted Remediation
+      description: What has already been tried?
+    validations:
+      required: true
+
+  - type: textarea
+    id: unblock-request
+    attributes:
+      label: Requested Unblock Action
+      description: Specific action/decision needed from OgaArchitect or human approver.
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Relevant logs, links, screenshots, and timestamps.

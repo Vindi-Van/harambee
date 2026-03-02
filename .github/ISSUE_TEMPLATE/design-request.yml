@@ -1,0 +1,53 @@
+name: Design Request
+about: Request architecture/design direction before implementation
+title: "[Design] "
+labels: ["stage:design", "status:ready", "type:design", "priority:p2"]
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Problem Context
+      description: What problem are we solving and for whom?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed Direction
+      description: Initial design or options to evaluate.
+    validations:
+      required: true
+
+  - type: textarea
+    id: tradeoffs
+    attributes:
+      label: Risks & Tradeoffs
+      description: Technical, product, or delivery risks and mitigations.
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Architecture Impact
+      description: APIs, data model, security, operability, and migration implications.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: approval
+    attributes:
+      label: Human Approval Requirement
+      options:
+        - "Required"
+        - "Critical changes only"
+        - "Not required by policy"
+    validations:
+      required: true
+
+  - type: textarea
+    id: artifacts
+    attributes:
+      label: Design Artifacts
+      description: Link diagrams, sequence flows, mockups, or ADR drafts.
