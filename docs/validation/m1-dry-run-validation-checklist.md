@@ -25,9 +25,10 @@ Discussion-template path addressed in this run:
 
 - [x] Labels in `docs/governance/labels.md` are now available in repo labels.
   - Evidence: labels created via `gh label create` set (all governance families present).
-- [~] Workflow states in Project v2 are mapped via automation artifacts, but live run evidence is pending project scope/config.
+- [x] Workflow states in Project v2 are mapped via automation artifacts **and validated in a live run**.
   - Added: `.github/workflows/projectv2-governance-sync.yml`, `scripts/projectv2_sync.sh`, `docs/governance/project-v2-automation.md`
-  - Blocker: current local `gh` token lacks `read:project`/`project` scopes; repo vars for project/field/option IDs are unset.
+  - Evidence: live sample issue [#77](https://github.com/Vindi-Van/harambee/issues/77) moved Intake → Execution → Verification → Done with Project v2 status updates (`Todo` → `In progress` → `In progress` → `Done`) captured in `docs/validation/artifacts/m1-projectv2-live-validation-2026-03-02.txt`.
+  - Access check: `gh auth status` shows token scope includes `project`; project/field/option repo variables are now set.
 - [x] Transition gate requirements from `docs/governance/transition-gates.md` were used as dry-run gate reference.
 
 ---
@@ -44,6 +45,34 @@ Discussion-template path addressed in this run:
 Notes:
 - GitHub CLI form parity limitation: issue forms were represented with equivalent required sections in body text; labels/states were validated through explicit transitions in issue timelines.
 - Stage naming follows current M1 state labels (`stage:*`) as documented in governance.
+
+---
+
+## Live Project v2 Validation (2026-03-02)
+
+Sample issue:
+- [#77](https://github.com/Vindi-Van/harambee/issues/77) — `M1 Project v2 live validation sample (2026-03-02)`
+
+Project target:
+- <https://github.com/users/Vindi-Van/projects/3>
+
+Executed transitions + observed project status:
+- Intake (`stage:intake`) -> `Todo`
+- Execution (`stage:execution`) -> `In progress`
+- Verification (`stage:verification`) -> `In progress`
+- Done (issue closed / `status:done`) -> `Done`
+
+Command/output evidence:
+- Full command transcript: `docs/validation/artifacts/m1-projectv2-live-validation-2026-03-02.txt`
+- Key sync outputs recorded:
+  - `synced Vindi-Van/harambee#77 -> intake (option f75ad846)`
+  - `synced Vindi-Van/harambee#77 -> execution (option 47fc9ee4)`
+  - `synced Vindi-Van/harambee#77 -> verification (option 47fc9ee4)`
+  - `synced Vindi-Van/harambee#77 -> done (option 98236657)`
+
+Note on current project schema:
+- Project #3 currently exposes 3 status options (`Todo`, `In progress`, `Done`) rather than the full governance state set.
+- Repo variable mapping therefore compresses governance stages into this 3-state model for live enforcement.
 
 ---
 
@@ -76,7 +105,7 @@ Category mapping used for M1 validation:
 
 Follow-up action required:
 1. (Optional hardening) Create dedicated discussion categories for dispatch/standup/escalation to remove semantic ambiguity.
-2. Complete live Project v2 validation run after setting project IDs/options + token scopes (see `docs/governance/project-v2-automation.md`).
+2. (Optional hardening) Expand Project v2 Status field options to full governance granularity (Intake/Design/Review Gate/Decomposition/Execution/Verification/Deployment/Blocked/Done) to remove compressed 3-state mapping.
 
 Interim replacement workflow (documented):
 - Use issue/discussion fallback protocol in `docs/protocols/discussion-template-usage.md` only if Discussions is later disabled or unavailable.
@@ -92,7 +121,7 @@ Interim replacement workflow (documented):
 - Fail count: 0
 - Open follow-ups:
   - Optional: create dedicated GitHub Discussions categories for dispatch/standup/escalation.
-  - Map workflow states into Project v2 automation.
+  - Optional: expand Project v2 Status field options for full governance-state fidelity (currently validated with compressed 3-state mapping).
 - Recommendation: M1 exit **GO**
   - Issue-template lifecycle criterion is satisfied.
   - Discussion live-post validation is satisfied (3/3 templates posted and linked).
