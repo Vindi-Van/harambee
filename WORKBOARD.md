@@ -23,13 +23,18 @@
   - Escalation: <https://github.com/Vindi-Van/harambee/discussions/66>
 - Marked M1 discussion validation complete in `docs/validation/m1-dry-run-validation-checklist.md`.
 - Closed M1 tracker status in `docs/task-tracker.md`.
+- Added Project v2 governance automation artifacts:
+  - `.github/workflows/projectv2-governance-sync.yml`
+  - `scripts/projectv2_sync.sh`
+  - `docs/governance/project-v2-automation.md`
+- Updated M1 validation/tracker docs to reflect automation wiring + live validation blocker context.
 
 ## Active (In Progress)
-- M2 dispatch protocol simulation planning (next milestone).
+- Complete live Project v2 validation evidence run (one sample issue through mapped status transitions) after project IDs/options and token scopes are configured.
 
 ## Next
-- Execute M2 dispatch protocol simulation with 3-task anti-collision evidence set.
-- Wire/verify Project v2 workflow automation mappings for documented governance states.
+- Optional hardening: dedicated discussion categories for dispatch/standup/escalation.
+- Begin M3 contracts-in-practice end-to-end flow with QA bounce-back evidence.
 
 ## Blocked
-- None.
+- Project v2 live validation currently blocked by missing `read:project`/`project` token scope and unset repo variables for project/field/option IDs.
