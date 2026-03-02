@@ -75,3 +75,46 @@ export function ensureRegistryIssue(owner: string, repo: string): { issueNumber:
   const parsed = JSON.parse(created) as { number: number; url: string };
   return { issueNumber: parsed.number, issueUrl: parsed.url };
 }
+
+export function getRegistryIssueBody(owner: string, repo: string, issueNumber: number): string {
+  return runGh(["api", `repos/${owner}/${repo}/issues/${issueNumber}`, "--jq", ".body // \"\""]);
+}
+
+export function findActiveOgaAgent(registryBody: string): string | null {
+  const lines = registryBody.split(/\r?\n/);
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+    if (!line.startsWith("|")) continue;
+    if (line.includes("---")) continue;
+
+    const cols = line
+      .split("|")
+      .map((part) => part.trim())
+      .filter(Boolean);
+
+    if (cols.length < 4) continue;
+    const [agent, role, status] = cols;
+    if (role.toLowerCase() === "oga" && status.toLowerCase() === "active") {
+      return agent;
+    }
+  }
+  return null;
+}
+
+export function enforceOgaRolePolicy(params: {
+  requestedRole: string;
+  viewer: string;
+  registryBody: string;
+  allowOgaOverride?: boolean;
+}): void {
+  if (params.requestedRole !== "oga") return;
+
+  const activeOga = findActiveOgaAgent(params.registryBody);
+  if (!activeOga || activeOga === params.viewer) return;
+
+  if (params.allowOgaOverride) return;
+
+  throw new Error(
+    `Oga activation blocked: active Oga '${activeOga}' already exists. Re-run with --allow-oga-override only with explicit owner approval.`
+  );
+}

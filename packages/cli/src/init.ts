@@ -5,12 +5,18 @@ import { stdin as input, stdout as output } from "node:process";
 import { AGENT_ROLES, type AgentRole, type InitConfig } from "./types.js";
 import { parseProjectUrl, parseRepoUrl } from "./validate.js";
 import {
+  enforceOgaRolePolicy,
   ensureGhAuth,
   ensureProjectReadable,
   ensureRegistryIssue,
   ensureRepoWriteAccess,
+  getRegistryIssueBody,
   getViewerLogin
 } from "./gh.js";
+
+export interface InitOptions {
+  allowOgaOverride?: boolean;
+}
 
 async function promptUntilValid(prompt: string, validate: (value: string) => string | null): Promise<string> {
   const rl = createInterface({ input, output });
@@ -46,7 +52,7 @@ function upsertConfig(path: string, nextConfig: InitConfig): void {
   writeFileSync(path, `${JSON.stringify(finalConfig, null, 2)}\n`, "utf8");
 }
 
-export async function runInit(): Promise<void> {
+export async function runInit(options: InitOptions = {}): Promise<void> {
   ensureGhAuth();
 
   const projectContext = await promptUntilValid("Project name/context: ", (v) =>
@@ -75,6 +81,16 @@ export async function runInit(): Promise<void> {
 
   const viewer = getViewerLogin();
   const registry = ensureRegistryIssue(repo.owner, repo.repo);
+
+  if (role === "oga") {
+    const registryBody = getRegistryIssueBody(repo.owner, repo.repo, registry.issueNumber);
+    enforceOgaRolePolicy({
+      requestedRole: role,
+      viewer,
+      registryBody,
+      allowOgaOverride: options.allowOgaOverride
+    });
+  }
 
   const config: InitConfig = {
     version: 1,
