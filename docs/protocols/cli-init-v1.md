@@ -3,6 +3,14 @@
 ## Goal
 Get a new user from install to a working single-project setup in one guided CLI flow.
 
+## Exact Usage
+```bash
+harambee init [--allow-oga-override]
+```
+
+- Default behavior enforces one active Oga per repository.
+- `--allow-oga-override` bypasses that guard and should only be used with explicit owner approval.
+
 ## Scope (v1)
 - one GitHub repo
 - one GitHub Project
