@@ -74,7 +74,6 @@ This tracker records what is **done** vs **not done** by milestone and execution
 - Discussion usage protocol: `docs/protocols/discussion-template-usage.md`
 - Milestones: `docs/milestones.md`
 - M5 reusable template: `docs/starter-kit/reusable-template.md`
-- M5 adoption guide skeleton: `docs/starter-kit/adoption-under-1-day.md`
-- M5 adoption checklist scaffold: `docs/validation/m5-second-project-adoption-under-1-day-checklist.md`
-- M5 adoption artifact scaffold: `docs/validation/artifacts/m5-second-project-adoption-simulation-2026-03-02.md`
+- M5 adoption guide (now includes executed proof): `docs/starter-kit/adoption-under-1-day.md`
+- M5 adoption executed artifact log: `docs/validation/artifacts/m5-adoption-live-proof-2026-03-02.txt`
 - Current board: `WORKBOARD.md`
