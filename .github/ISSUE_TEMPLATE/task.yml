@@ -1,0 +1,62 @@
+name: Task
+about: Create a standard implementation task for Harambee execution
+title: "[Task] "
+labels: ["stage:intake", "status:ready", "type:task", "priority:p2"]
+body:
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: What outcome must be achieved and why now?
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: In Scope / Out of Scope
+      description: Clarify boundaries to reduce rework.
+      placeholder: |
+        In scope:
+        - ...
+
+        Out of scope:
+        - ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: Checklist of testable completion conditions.
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: complexity
+    attributes:
+      label: Complexity
+      options:
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "5"
+    validations:
+      required: true
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: Linked issues/PRs/decisions that must land first.
+
+  - type: textarea
+    id: artifacts
+    attributes:
+      label: Required Artifacts
+      description: Required handoff outputs (PR, test report, screenshots, checklist, etc.).

@@ -1,6 +1,6 @@
 # Workflow States (Milestone 1)
 
-## Canonical Stages
+## Canonical Lifecycle
 1. Intake / Shura
 2. Design / Architecture
 3. Review Gate (human optional/required by policy)
@@ -8,6 +8,22 @@
 5. Execution
 6. Verification
 7. Deployment
+8. Done
+
+## GitHub Project v2 State Model
+Use **Status** as the canonical project field for board columns.
+
+| Project Column (Status) | Required `stage:*` label | Meaning |
+|---|---|---|
+| Intake | `stage:intake` | New item, triage, scope framing |
+| Design | `stage:design` | Solution options + architecture notes |
+| Review Gate | `stage:review-gate` | Awaiting policy/human approval |
+| Decomposition | `stage:decomposition` | C4/C5 split into executable children |
+| Execution | `stage:execution` | Build/implement in progress |
+| Verification | `stage:verification` | Independent review + QA checks |
+| Deployment | `stage:deployment` | Release + post-deploy validation |
+| Done | `stage:deployment` + `status:done` | Completed with evidence |
+| Blocked | any + `status:blocked` | Delivery blocked pending unblock action |
 
 ## State Rules
 - Exactly one `stage:*` label at a time.
