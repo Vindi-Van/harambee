@@ -9,6 +9,7 @@ A GitHub-native community orchestration framework where specialized agents colla
 This repo currently contains the **v1 design docs** and execution plan for:
 - OgaArchitect-led orchestration (combined Oga + Architect role)
 - GitHub-first canonical workflow (Issues/PRs/Projects/Discussions)
+  - Full capability requires repository Discussions enabled (dispatch/standup/escalation workflows)
 - Role contracts and handoff gates
 - Complexity rubric (1–5)
 - Reserved fix windows after stage handoff

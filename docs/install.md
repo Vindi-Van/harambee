@@ -24,7 +24,11 @@ At minimum, operator credentials/bot token should be able to:
 - read/write PRs and review comments
 - read/write labels
 - read/write Project fields (if using Projects for stage state)
-- read Discussions (write if using discussions for coordination)
+- read/write Discussions
+
+**Repository setting requirement:** GitHub Discussions must be enabled for full Harambee capability (dispatch, standup, escalation discussion workflows). Verify with:
+- REST: `has_discussions=true`
+- GraphQL: `hasDiscussionsEnabled=true`
 
 If using branch protection and required checks:
 - ensure bot/user has permissions compatible with merge policy.

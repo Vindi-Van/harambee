@@ -19,15 +19,16 @@
 - Synced tracker state in `docs/task-tracker.md`.
 
 ## Active (In Progress)
-- M1 closeout decision is now **conditional**:
+- M1 closeout moved from **conditional** to **ready to finalize**:
   - Issue-template dry-run criterion is satisfied.
-  - Discussion live-post validation is blocked because GitHub Discussions is disabled in repo settings (`has_discussions=false`).
+  - Repo Discussions setting is now enabled (`has_discussions=true`, GraphQL `hasDiscussionsEnabled=true`).
+  - Remaining action is operational validation (post one sample discussion per template).
 
 ## Next
-- Maintainer action: enable GitHub Discussions and create/verify categories.
+- Create/verify category mapping for dispatch/standup/escalation discussions.
 - Run one live sample discussion post per template (dispatch/standup/escalation).
 - Capture those links in `docs/validation/m1-dry-run-validation-checklist.md` to finalize M1 close.
 - Begin M2 dispatch protocol simulation.
 
 ## Blocked
-- Live discussion-template validation is blocked pending repo Discussions enablement.
+- No current blockers from repository-level Discussions availability.

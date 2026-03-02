@@ -9,7 +9,7 @@ This tracker records what is **done** vs **not done** by milestone and execution
 | Milestone | Status | Done | Not Done / Remaining |
 | --- | --- | --- | --- |
 | M0 — Foundation Docs | In review | Architecture/docs baseline exists (`docs/architecture-v1.md`, `docs/milestones.md`, `docs/task-breakdown.md`, `docs/roles-and-contracts.md`, `docs/complexity-rubric.md`) | Explicit "human approval of v1 design baseline" not yet recorded in repo artifacts |
-| M1 — Workflow Schema & Governance | Conditional GO (exit package executed) | Real dry-run executed: one sample issue each for task/bug/design/blocker (#58-#61), lifecycle transitions captured, validation checklist updated, discussion templates + usage protocol added | Final M1 closeout decision pending: repo Discussions currently disabled (`has_discussions=false`), so live discussion-post validation remains |
+| M1 — Workflow Schema & Governance | In final validation | Real dry-run executed: one sample issue each for task/bug/design/blocker (#58-#61), lifecycle transitions captured, validation checklist updated, discussion templates + usage protocol added, repo Discussions enabled (`has_discussions=true`, GraphQL `hasDiscussionsEnabled=true`) | Post one live sample discussion per template (dispatch/standup/escalation) and record links for final M1 closeout |
 | M2 — OgaArchitect Dispatch | Not started | Protocol docs exist (`docs/protocols/assignment-flow.md`) | Simulated assignment run evidence for 3 tasks without collision not yet produced |
 | M3 — Contracts in Practice | Not started | Test matrix seeds exist in docs/testing | End-to-end feature flow with QA bounce-back evidence not yet produced |
 | M4 — Optional Redis Coordination | Not started | None required yet | Failure simulation + safe reassignment evidence not yet produced |
@@ -43,7 +43,7 @@ This tracker records what is **done** vs **not done** by milestone and execution
   - Discussion template files added: `.github/DISCUSSION_TEMPLATE/{dispatch,standup,escalation,config}.yml`.
   - Usage/fallback protocol added: `docs/protocols/discussion-template-usage.md`.
 - ⏳ Not done
-  - Live discussion-post validation blocked until GitHub Discussions is enabled.
+  - Live discussion-post validation samples still need to be posted and linked (repo Discussions prerequisite is now satisfied).
 
 ### Track D — Runtime/Execution Readiness
 - ✅ Done
