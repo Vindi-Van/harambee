@@ -1,0 +1,2 @@
+#!/bin/bash
+git diff --name-status 64ce97308efd45098552c28975e519fbfa6dedb2 7db429cb9c90477f5a750286c59036b326a037fa
