@@ -38,10 +38,13 @@
 ## Active (In Progress)
 - Complete live Project v2 validation evidence run (one sample issue through mapped status transitions) after project IDs/options and token scopes are configured.
 - Optional M3 hardening: run the same contracts-in-practice scenario against a live GitHub issue/PR path and attach runtime links.
+- Started M4 optional Redis coordination closeout planning:
+  - Added protocol draft: `docs/protocols/redis-coordination.md`
+  - Added failure simulation checklist: `docs/validation/m4-redis-failure-simulation-checklist.md`
 
 ## Next
+- Implement executable M4 simulation tests for lease exclusivity, stale-worker reclaim, and retry-cap escalation.
 - Optional hardening: dedicated discussion categories for dispatch/standup/escalation.
-- Begin next unfinished milestone backlog item (M4 optional Redis coordination simulation) once M2/M3 closeout is merged.
 
 ## Blocked
 - Project v2 live validation currently blocked by missing `read:project`/`project` token scope and unset repo variables for project/field/option IDs.
