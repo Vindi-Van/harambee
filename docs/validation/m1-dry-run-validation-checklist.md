@@ -48,7 +48,8 @@ Notes:
 ## Discussion Template Usage Path Validation
 
 Current repo/API status observed during run:
-- `has_discussions=false` for repo (`gh api repos/Vindi-Van/harambee`)
+- `has_discussions=true` for repo (`gh api repos/Vindi-Van/harambee`)
+- `hasDiscussionsEnabled=true` via GraphQL (`gh api graphql` repository query)
 
 ### Gap Checklist
 - [x] Confirm desired categories and usage intent represented:
@@ -57,15 +58,15 @@ Current repo/API status observed during run:
   - [x] escalation
 - [x] Define minimum required fields for each discussion template.
 - [x] Add template files under `.github/DISCUSSION_TEMPLATE/`.
-- [ ] Validate one sample discussion post per template (blocked by Discussions disabled).
+- [ ] Validate one sample discussion post per template (repository setting prerequisite satisfied; sample-post evidence still pending).
 - [x] Record pass/fail and follow-up action.
 
 Follow-up action required:
-1. Enable GitHub Discussions in repository settings.
-2. Create/verify category mapping and post one sample discussion per template.
+1. Create/verify category mapping.
+2. Post one sample discussion per template and record links.
 
 Interim replacement workflow (documented):
-- Use issue/discussion fallback protocol in `docs/protocols/discussion-template-usage.md` until Discussions is enabled.
+- Use issue/discussion fallback protocol in `docs/protocols/discussion-template-usage.md` only if Discussions is later disabled or unavailable.
 
 ---
 
@@ -77,8 +78,8 @@ Interim replacement workflow (documented):
 - Pass count: 4
 - Fail count: 0 (issue templates); 1 pending validation item (discussion live-post verification)
 - Open follow-ups:
-  - Enable and wire GitHub Discussions categories to complete live discussion-post validation.
+  - Create and verify GitHub Discussions categories and complete live discussion-post validation.
   - Map workflow states into Project v2 automation.
 - Recommendation: M1 exit **CONDITIONAL GO**
   - GO for issue-template lifecycle criterion.
-  - Final closeout depends on discussion enablement decision/validation per documented path.
+  - Final closeout depends on discussion live-post validation per documented path.
