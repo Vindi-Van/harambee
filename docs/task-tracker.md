@@ -1,6 +1,6 @@
 # Harambee Task Tracker
 
-_Last updated: 2026-03-02 (post-merge PR #56)_
+_Last updated: 2026-03-02 (M1 dry-run execution run)_
 
 This tracker records what is **done** vs **not done** by milestone and execution track.
 
@@ -9,7 +9,7 @@ This tracker records what is **done** vs **not done** by milestone and execution
 | Milestone | Status | Done | Not Done / Remaining |
 | --- | --- | --- | --- |
 | M0 — Foundation Docs | In review | Architecture/docs baseline exists (`docs/architecture-v1.md`, `docs/milestones.md`, `docs/task-breakdown.md`, `docs/roles-and-contracts.md`, `docs/complexity-rubric.md`) | Explicit "human approval of v1 design baseline" not yet recorded in repo artifacts |
-| M1 — Workflow Schema & Governance | In progress (near exit) | PR #56 merged; governance docs + templates landed (`task`, `bug`, `design request`, `blocker`), state model, labels, transition gate matrix | M1 exit dry-run evidence package (one sample issue per template type) not yet attached as artifact; discussion template gap remains (dispatch/standup/escalation templates absent) |
+| M1 — Workflow Schema & Governance | Conditional GO (exit package executed) | Real dry-run executed: one sample issue each for task/bug/design/blocker (#58-#61), lifecycle transitions captured, validation checklist updated, discussion templates + usage protocol added | Final M1 closeout decision pending: repo Discussions currently disabled (`has_discussions=false`), so live discussion-post validation remains |
 | M2 — OgaArchitect Dispatch | Not started | Protocol docs exist (`docs/protocols/assignment-flow.md`) | Simulated assignment run evidence for 3 tasks without collision not yet produced |
 | M3 — Contracts in Practice | Not started | Test matrix seeds exist in docs/testing | End-to-end feature flow with QA bounce-back evidence not yet produced |
 | M4 — Optional Redis Coordination | Not started | None required yet | Failure simulation + safe reassignment evidence not yet produced |
@@ -26,8 +26,9 @@ This tracker records what is **done** vs **not done** by milestone and execution
   - `docs/governance/labels.md`
   - `docs/governance/states.md`
   - `docs/governance/transition-gates.md`
+  - Governance labels provisioned in repo for dry-run execution
 - ⏳ Not done
-  - Dry-run validation artifacts confirming real usage per template type.
+  - None blocking within issue-template scope
 
 ### Track B — Workflow Operations / Project Wiring
 - ✅ Done
@@ -38,18 +39,21 @@ This tracker records what is **done** vs **not done** by milestone and execution
 ### Track C — Validation & Exit Evidence (M1 Exit)
 - ✅ Done
   - M1 exit criterion defined in `docs/milestones.md`.
+  - Dry-run evidence package completed in `docs/validation/m1-dry-run-validation-checklist.md` with real issue links (#58-#61).
+  - Discussion template files added: `.github/DISCUSSION_TEMPLATE/{dispatch,standup,escalation,config}.yml`.
+  - Usage/fallback protocol added: `docs/protocols/discussion-template-usage.md`.
 - ⏳ Not done
-  - Single dry-run package proving one sample issue lifecycle per template type.
-  - Discussion template gap documented and actioned.
+  - Live discussion-post validation blocked until GitHub Discussions is enabled.
 
 ### Track D — Runtime/Execution Readiness
 - ✅ Done
-  - Runtime harness evidence path merged (Issue #52 now closed).
+  - Runtime harness evidence path merged (Issue #52 closed).
 - ⏳ Not done
   - M2 assignment simulation evidence and anti-collision proof set.
 
 ## Source of Truth References
-- PR #56 (merged): <https://github.com/Vindi-Van/harambee/pull/56>
-- Issue #52 (closed): <https://github.com/Vindi-Van/harambee/issues/52>
+- M1 dry-run issues: <https://github.com/Vindi-Van/harambee/issues/58>, <https://github.com/Vindi-Van/harambee/issues/59>, <https://github.com/Vindi-Van/harambee/issues/60>, <https://github.com/Vindi-Van/harambee/issues/61>
+- Validation checklist: `docs/validation/m1-dry-run-validation-checklist.md`
+- Discussion usage protocol: `docs/protocols/discussion-template-usage.md`
 - Milestones: `docs/milestones.md`
 - Current board: `WORKBOARD.md`

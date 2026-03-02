@@ -1,92 +1,84 @@
 # M1 Exit Dry-Run Validation Checklist
 
-Purpose: satisfy the M1 exit criterion by defining a dry-run validation for one sample issue per template type, plus explicit handling of the discussion-template gap.
+Purpose: satisfy the M1 exit criterion by executing one real dry-run issue per required template type and recording objective evidence.
 
 Reference: `docs/milestones.md` → M1 exit criterion: _"dry-run of one sample task through full lifecycle"_.
 
-## Scope
+## Scope Executed (2026-03-02)
 
-Template types covered in this dry-run package:
-- `task` (`.github/ISSUE_TEMPLATE/task.yml`)
-- `bug` (`.github/ISSUE_TEMPLATE/bug.yml`)
-- `design request` (`.github/ISSUE_TEMPLATE/design-request.yml`)
-- `blocker` (`.github/ISSUE_TEMPLATE/blocker.yml`)
-- (existing non-M1 template) `qa-return` (`.github/ISSUE_TEMPLATE/qa-return.yml`)
+Template types executed in this run:
+- `task` (`.github/ISSUE_TEMPLATE/task.yml`) → Issue #58
+- `bug` (`.github/ISSUE_TEMPLATE/bug.yml`) → Issue #59
+- `design request` (`.github/ISSUE_TEMPLATE/design-request.yml`) → Issue #60
+- `blocker` (`.github/ISSUE_TEMPLATE/blocker.yml`) → Issue #61
 
-Discussion-template gap to validate:
-- `dispatch` discussion template (missing)
-- `standup` discussion template (missing)
-- `escalation` discussion template (missing)
+Discussion-template path addressed in this run:
+- Added `.github/DISCUSSION_TEMPLATE/dispatch.yml`
+- Added `.github/DISCUSSION_TEMPLATE/standup.yml`
+- Added `.github/DISCUSSION_TEMPLATE/escalation.yml`
+- Added `.github/DISCUSSION_TEMPLATE/config.yml`
+- Added usage protocol: `docs/protocols/discussion-template-usage.md`
 
 ---
 
 ## Preflight Checks
 
-- [ ] Labels in `docs/governance/labels.md` are available in repo labels.
-- [ ] Workflow states in `docs/governance/states.md` are mapped in Project v2 (or documented as pending).
-- [ ] Transition gate requirements from `docs/governance/transition-gates.md` are known to reviewer.
+- [x] Labels in `docs/governance/labels.md` are now available in repo labels.
+  - Evidence: labels created via `gh label create` set (all governance families present).
+- [ ] Workflow states in Project v2 are mapped (still pending; out of this run’s scope).
+- [x] Transition gate requirements from `docs/governance/transition-gates.md` were used as dry-run gate reference.
 
 ---
 
-## Dry-Run Sample Matrix (One Sample per Template Type)
+## Dry-Run Sample Matrix (One Sample per Required Template)
 
-| Template | Sample Issue | Initial Labels Verified | Required Fields Complete | Lifecycle Path (planned) | Evidence Collected | Result |
+| Template | Sample Issue | Initial Labels Verified | Required Fields Complete | Lifecycle Path Executed | Evidence Collected | Result |
 | --- | --- | --- | --- | --- | --- | --- |
-| Task | TBD (#____) | [ ] | [ ] | intake → planning → execution → verification → done | [ ] | PASS / FAIL |
-| Bug | TBD (#____) | [ ] | [ ] | intake → planning → execution → verification → done | [ ] | PASS / FAIL |
-| Design Request | TBD (#____) | [ ] | [ ] | design/review → planning → execution or closure | [ ] | PASS / FAIL |
-| Blocker | TBD (#____) | [ ] | [ ] | blocked raised → unblock decision/action → resumed state | [ ] | PASS / FAIL |
-| QA Return (gap-support) | TBD (#____) | [ ] | [ ] | verification failure → execution re-entry → verification pass | [ ] | PASS / FAIL |
+| Task | [#58](https://github.com/Vindi-Van/harambee/issues/58) | ✅ (`stage:intake`, `status:ready`, `type:task`, `priority:p2`) | ✅ | intake → execution → verification → done/closed | Issue timeline + comments + close note | PASS |
+| Bug | [#59](https://github.com/Vindi-Van/harambee/issues/59) | ✅ (`stage:intake`, `status:ready`, `type:bug`, `priority:p1`) | ✅ | intake → execution → verification → done/closed | Issue timeline + close note | PASS |
+| Design Request | [#60](https://github.com/Vindi-Van/harambee/issues/60) | ✅ (`stage:design`, `status:ready`, `type:design`, `priority:p2`) | ✅ | design → review-gate → execution → verification → done/closed | Issue timeline + close note | PASS |
+| Blocker | [#61](https://github.com/Vindi-Van/harambee/issues/61) | ✅ (`status:blocked`, `type:blocker`, `priority:p0`) | ✅ | blocked raised → unblock decision → execution → verification → done/closed | Issue timeline + unblock comment + close note | PASS |
 
-Minimum evidence per sample:
-- Issue link and final state
-- Label/state transitions captured (timeline or screenshots)
-- Artifact links as required by gate (PR/test/report/checklist)
-- Closure note summarizing whether template guided execution correctly
+Notes:
+- GitHub CLI form parity limitation: issue forms were represented with equivalent required sections in body text; labels/states were validated through explicit transitions in issue timelines.
+- Stage naming follows current M1 state labels (`stage:*`) as documented in governance.
 
 ---
 
-## Per-Sample Checklist
+## Discussion Template Usage Path Validation
 
-Use for each sample issue above.
-
-- [ ] Template default labels applied correctly on issue creation.
-- [ ] Required fields were sufficient and not ambiguous.
-- [ ] Stage/status labels updated without singleton-family conflicts.
-- [ ] Gate artifacts attached before advancing states.
-- [ ] Verification step recorded explicit pass/fail.
-- [ ] If failed, return path (QA return / blocker) worked and was documented.
-- [ ] Final state + closure reason captured.
-
----
-
-## Discussion Template Gap Validation
-
-Current repo status: no `.github/DISCUSSION_TEMPLATE/*` files found.
+Current repo/API status observed during run:
+- `has_discussions=false` for repo (`gh api repos/Vindi-Van/harambee`)
 
 ### Gap Checklist
-- [ ] Confirm desired categories and usage intent:
-  - [ ] dispatch
-  - [ ] standup
-  - [ ] escalation
-- [ ] Define minimum required fields for each discussion template.
-- [ ] Add template files under `.github/DISCUSSION_TEMPLATE/` (or explicitly defer with rationale).
-- [ ] Validate one sample discussion post per template or approved substitute process.
-- [ ] Record pass/fail and follow-up actions.
+- [x] Confirm desired categories and usage intent represented:
+  - [x] dispatch
+  - [x] standup
+  - [x] escalation
+- [x] Define minimum required fields for each discussion template.
+- [x] Add template files under `.github/DISCUSSION_TEMPLATE/`.
+- [ ] Validate one sample discussion post per template (blocked by Discussions disabled).
+- [x] Record pass/fail and follow-up action.
 
-### Exit Decision Rule for Gap
-M1 validation can be marked complete only when one of the following is true:
-1. Discussion templates are added and sample-post validated, **or**
-2. Maintainers explicitly decide discussion templates are out of scope for M1 and document replacement workflow in `docs/protocols/`.
+Follow-up action required:
+1. Enable GitHub Discussions in repository settings.
+2. Create/verify category mapping and post one sample discussion per template.
+
+Interim replacement workflow (documented):
+- Use issue/discussion fallback protocol in `docs/protocols/discussion-template-usage.md` until Discussions is enabled.
 
 ---
 
-## Completion Summary (to fill after execution)
+## Completion Summary
 
-- Dry-run date:
-- Validator(s):
-- Samples executed:
-- Pass count:
-- Fail count:
+- Dry-run date: 2026-03-02
+- Validator: @matrim-mastermind
+- Samples executed: 4/4 required issue templates
+- Pass count: 4
+- Fail count: 0 (issue templates); 1 pending validation item (discussion live-post verification)
 - Open follow-ups:
-- Recommendation: M1 exit **GO / NO-GO**
+  - Enable and wire GitHub Discussions categories to complete live discussion-post validation.
+  - Map workflow states into Project v2 automation.
+- Recommendation: M1 exit **CONDITIONAL GO**
+  - GO for issue-template lifecycle criterion.
+  - Final closeout depends on discussion enablement decision/validation per documented path.

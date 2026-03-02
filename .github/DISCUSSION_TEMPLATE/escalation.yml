@@ -1,0 +1,29 @@
+title: "[Escalation] "
+labels: ["status:blocked", "priority:p0"]
+body:
+  - type: textarea
+    id: blocked_item
+    attributes:
+      label: Blocked item
+      description: Link issue/PR/task currently blocked.
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Delivery impact
+      description: What slips if unresolved?
+    validations:
+      required: true
+  - type: textarea
+    id: ask
+    attributes:
+      label: Decision/action needed
+      description: Specific unblock request and owner.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Logs/screenshots/notes with timestamps.
