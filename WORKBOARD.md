@@ -23,13 +23,18 @@
   - Escalation: <https://github.com/Vindi-Van/harambee/discussions/66>
 - Marked M1 discussion validation complete in `docs/validation/m1-dry-run-validation-checklist.md`.
 - Closed M1 tracker status in `docs/task-tracker.md`.
+- Executed M2 OgaArchitect dispatch simulation evidence set:
+  - Added test suite: `packages/oga/test/execution/m2DispatchSimulation.test.ts`
+  - Added validation artifact: `docs/validation/m2-dispatch-simulation-checklist.md`
+  - Verified protocol flows: worker-ready/request-task, assignment ack-timeout requeue, reserved fix window enforcement, 3-task no-collision proof
+- Updated M2 milestone status to complete in `docs/task-tracker.md`.
 
 ## Active (In Progress)
-- M2 dispatch protocol simulation planning (next milestone).
+- Wire/verify Project v2 workflow automation mappings for documented governance states.
 
 ## Next
-- Execute M2 dispatch protocol simulation with 3-task anti-collision evidence set.
-- Wire/verify Project v2 workflow automation mappings for documented governance states.
+- Optional hardening: run live GitHub issue/discussion replay for M2 protocol to complement policy-level simulation evidence.
+- Begin M3 contracts-in-practice end-to-end flow with QA bounce-back evidence.
 
 ## Blocked
 - None.

@@ -1,6 +1,6 @@
 # Harambee Task Tracker
 
-_Last updated: 2026-03-02 (M1 closeout validated)_
+_Last updated: 2026-03-02 (M2 dispatch simulation validated)_
 
 This tracker records what is **done** vs **not done** by milestone and execution track.
 
@@ -10,7 +10,7 @@ This tracker records what is **done** vs **not done** by milestone and execution
 | --- | --- | --- | --- |
 | M0 — Foundation Docs | In review | Architecture/docs baseline exists (`docs/architecture-v1.md`, `docs/milestones.md`, `docs/task-breakdown.md`, `docs/roles-and-contracts.md`, `docs/complexity-rubric.md`) | Explicit "human approval of v1 design baseline" not yet recorded in repo artifacts |
 | M1 — Workflow Schema & Governance | Complete | Real dry-run executed: one sample issue each for task/bug/design/blocker (#58-#61), lifecycle transitions captured, validation checklist updated, discussion templates + usage protocol added, repo Discussions enabled (`has_discussions=true`, GraphQL `hasDiscussionsEnabled=true`), and live sample discussions posted for dispatch/standup/escalation (#64-#66) | Optional hardening: dedicated discussion categories; remaining required work is Project v2 automation mapping |
-| M2 — OgaArchitect Dispatch | Not started | Protocol docs exist (`docs/protocols/assignment-flow.md`) | Simulated assignment run evidence for 3 tasks without collision not yet produced |
+| M2 — OgaArchitect Dispatch | Complete | Protocol docs + executable simulation evidence completed (`docs/protocols/assignment-flow.md`, `docs/validation/m2-dispatch-simulation-checklist.md`, `packages/oga/test/execution/m2DispatchSimulation.test.ts`) covering worker-ready/request-task, ack timeout requeue, reserved fix window enforcement, and 3-task anti-collision proof | Optional hardening: extend from policy-level simulation to GitHub issue/discussion live-fire replay artifacts |
 | M3 — Contracts in Practice | Not started | Test matrix seeds exist in docs/testing | End-to-end feature flow with QA bounce-back evidence not yet produced |
 | M4 — Optional Redis Coordination | Not started | None required yet | Failure simulation + safe reassignment evidence not yet produced |
 | M5 — Starter Kit | Not started | None required yet | Reusable template + adoption proof (<1 day) not yet produced |
@@ -48,13 +48,14 @@ This tracker records what is **done** vs **not done** by milestone and execution
 ### Track D — Runtime/Execution Readiness
 - ✅ Done
   - Runtime harness evidence path merged (Issue #52 closed).
+  - M2 assignment simulation evidence + anti-collision proof set completed in `docs/validation/m2-dispatch-simulation-checklist.md` and `packages/oga/test/execution/m2DispatchSimulation.test.ts`.
 - ⏳ Not done
-  - M2 assignment simulation evidence and anti-collision proof set.
+  - Optional live-fire GitHub replay evidence (beyond policy guard simulation) for future hardening.
 
 ## Source of Truth References
 - M1 dry-run issues: <https://github.com/Vindi-Van/harambee/issues/58>, <https://github.com/Vindi-Van/harambee/issues/59>, <https://github.com/Vindi-Van/harambee/issues/60>, <https://github.com/Vindi-Van/harambee/issues/61>
 - M1 live discussion samples: <https://github.com/Vindi-Van/harambee/discussions/64>, <https://github.com/Vindi-Van/harambee/discussions/65>, <https://github.com/Vindi-Van/harambee/discussions/66>
-- Validation checklist: `docs/validation/m1-dry-run-validation-checklist.md`
+- Validation checklists: `docs/validation/m1-dry-run-validation-checklist.md`, `docs/validation/m2-dispatch-simulation-checklist.md`
 - Discussion usage protocol: `docs/protocols/discussion-template-usage.md`
 - Milestones: `docs/milestones.md`
 - Current board: `WORKBOARD.md`
