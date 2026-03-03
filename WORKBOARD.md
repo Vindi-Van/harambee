@@ -25,6 +25,8 @@
 - Optional incremental governance-state reporting refinements (future additions).
 
 ## Recently Completed (Optional Backlog)
+- Added additive governance-state reporting observability fields (`issue_state`, `selection_reason`) to `sync_report`, with validation note:
+  - `docs/validation/artifacts/m1-governance-reporting-refinement-2026-03-03.md`
 - Added periodic replay-check operations runbook for M4 telemetry + M5 external adoption:
   - `docs/validation/m4-m5-periodic-replay-check-runbook.md`
 - Added default-branch canonicalization runbook (`master` -> `main`) with maintainer UI switch + CLI verification:

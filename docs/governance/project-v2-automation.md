@@ -169,11 +169,13 @@ scripts/projectv2_sync.sh "$authority_repo" "$issue_number"
 `projectv2_sync.sh` now emits a single parseable summary line on success:
 
 ```text
-sync_report repo=<owner/repo> issue=<n> governance_key=<intake|...|done|blocked> status_field_id=<field-id> status_option_id=<option-id> gov_field_updated=<true|false> gov_field_id=<field-id|unset> gov_option_id=<option-id|unset>
+sync_report repo=<owner/repo> issue=<n> issue_state=<open|closed> governance_key=<intake|...|done|blocked> selection_reason=<state:closed|label:...|default:intake> status_field_id=<field-id> status_option_id=<option-id> gov_field_updated=<true|false> gov_field_id=<field-id|unset> gov_option_id=<option-id|unset>
 ```
 
 Field semantics:
+- `issue_state`: raw GitHub issue state read by the sync (`open`/`closed`).
 - `governance_key`: canonical lifecycle key selected from labels/state precedence.
+- `selection_reason`: winning precedence rule used to derive `governance_key` (state-driven, label-driven, or default).
 - `status_field_id` + `status_option_id`: coarse built-in `Status` update target.
 - `gov_field_updated`: whether full-granularity `Governance State` was actually written.
 - `gov_field_id` + `gov_option_id`: governance-field target IDs when configured (otherwise `unset`).

@@ -1,6 +1,6 @@
 # Harambee Task Tracker
 
-_Last updated: 2026-03-02 (added default-branch canonicalization runbook for `main` migration)_
+_Last updated: 2026-03-03 (completed additive governance-state sync-report observability refinement)_
 
 This tracker records what is **done** vs **not done** by milestone and execution track.
 
@@ -9,7 +9,7 @@ This tracker records what is **done** vs **not done** by milestone and execution
 | Milestone | Status | Done | Not Done / Remaining |
 | --- | --- | --- | --- |
 | M0 — Foundation Docs | In review | Architecture/docs baseline exists (`docs/architecture-v1.md`, `docs/milestones.md`, `docs/task-breakdown.md`, `docs/roles-and-contracts.md`, `docs/complexity-rubric.md`) | Explicit "human approval of v1 design baseline" not yet recorded in repo artifacts |
-| M1 — Workflow Schema & Governance | Complete | Dry-run issues, discussion workflows, Project v2 automation + live validation, governance-state hardening, and reporting refinement completed with artifacts | Dedicated category creation remains manual UI-only (fallback mapping enforced) |
+| M1 — Workflow Schema & Governance | Complete | Dry-run issues, discussion workflows, Project v2 automation + live validation, governance-state hardening, and reporting refinements (including `issue_state` + `selection_reason` in `sync_report`) completed with artifacts | Dedicated category creation remains manual UI-only (fallback mapping enforced) |
 | M2 — OgaArchitect Dispatch | Complete | Protocol docs + executable simulation evidence completed (worker-ready/request-task, ack timeout requeue, fix-window enforcement, anti-collision proof) | Optional live-fire replay only |
 | M3 — Contracts in Practice | Complete | Sample flow + QA bounce-back evidence and live replay artifact completed | None blocking |
 | M4 — Optional Redis Coordination | Complete | Protocol + executable failure-mode simulation + telemetry replay artifacts completed | None blocking |
@@ -36,7 +36,8 @@ This tracker records what is **done** vs **not done** by milestone and execution
 - M1 live Project v2 validation: `docs/validation/artifacts/m1-projectv2-live-validation-2026-03-02.txt`
 - M1 governance-state hardening: `docs/validation/artifacts/m1-projectv2-governance-state-hardening-2026-03-02.md`
 - M1 discussion category fallback/API blocker: `docs/validation/artifacts/m1-discussion-category-hardening-2026-03-02.md`
-- M1 reporting refinement: `docs/validation/artifacts/m1-governance-reporting-refinement-2026-03-02.md`
+- M1 reporting refinement (baseline): `docs/validation/artifacts/m1-governance-reporting-refinement-2026-03-02.md`
+- M1 reporting refinement (additive observability): `docs/validation/artifacts/m1-governance-reporting-refinement-2026-03-03.md`
 - M2 checklist: `docs/validation/m2-dispatch-simulation-checklist.md`
 - M3 checklist + live replay: `docs/validation/m3-contracts-in-practice-sample-flow.md`, `docs/validation/artifacts/m3-live-github-replay-2026-03-02.md`
 - M4 checklist + telemetry replay: `docs/validation/m4-redis-failure-simulation-checklist.md`, `docs/validation/artifacts/m4-live-redis-telemetry-replay-2026-03-02.md`
