@@ -7,19 +7,26 @@
 
 ## Completed Milestones
 - M1 governance + dry-run lifecycle evidence completed (issues #58-#61, discussions #64-#66, PR #79).
+- M1 optional hardening complete:
+  - Project v2 `Governance State` full-granularity field + automation sync.
+  - Discussion template category fallback mapping with API blocker evidence.
+  - Incremental governance reporting (`sync_report`) refinement.
 - M2 OgaArchitect dispatch simulation evidence completed (PR #70).
 - M3 contracts-in-practice sample flow + live replay evidence completed (PR #72).
 - M4 Redis coordination simulation + telemetry replay hardening completed (PR #73).
 - M5 starter-kit adoption proof completed locally and via external replay (PRs #80, #82, #83).
-- Consolidation cleanup complete: superseded review-only PRs #84-#88 closed with rationale comments.
+- Consolidation cleanup complete: superseded review-only PRs #84-#88 closed.
 
 ## Active (In Progress)
 - None.
 
 ## Optional Backlog (Non-Blocking)
-- Optionally schedule periodic replay checks for M4 telemetry + M5 external adoption.
 - Optional discussion category isolation hardening (manual UI path) beyond current fallback mapping.
-- Optional incremental governance-state reporting refinements.
+- Optional incremental governance-state reporting refinements (future additions).
+
+## Recently Completed (Optional Backlog)
+- Added periodic replay-check operations runbook for M4 telemetry + M5 external adoption:
+  - `docs/validation/m4-m5-periodic-replay-check-runbook.md`
 
 ## Blocked
 - None.

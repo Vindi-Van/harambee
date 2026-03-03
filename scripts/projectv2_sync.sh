@@ -145,6 +145,9 @@ update_single_select_field() {
 
 update_single_select_field "$PROJECT_V2_STATUS_FIELD_ID" "$status_option_id"
 
+gov_field_updated="false"
+gov_option_id=""
+
 # Optional: mirror full governance lifecycle in dedicated field when configured.
 if [[ -n "${PROJECT_V2_GOV_FIELD_ID:-}" ]]; then
   case "$target_key" in
@@ -163,7 +166,8 @@ if [[ -n "${PROJECT_V2_GOV_FIELD_ID:-}" ]]; then
     echo "warning: governance field enabled but missing option id for ${target_key}; skipping governance-state update" >&2
   else
     update_single_select_field "$PROJECT_V2_GOV_FIELD_ID" "$gov_option_id"
+    gov_field_updated="true"
   fi
 fi
 
-echo "synced ${REPO}#${ISSUE_NUMBER} -> ${target_key} (status option ${status_option_id})"
+echo "sync_report repo=${REPO} issue=${ISSUE_NUMBER} governance_key=${target_key} status_field_id=${PROJECT_V2_STATUS_FIELD_ID} status_option_id=${status_option_id} gov_field_updated=${gov_field_updated} gov_field_id=${PROJECT_V2_GOV_FIELD_ID:-unset} gov_option_id=${gov_option_id:-unset}"
