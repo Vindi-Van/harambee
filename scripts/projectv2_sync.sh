@@ -70,24 +70,37 @@ has_label() {
 }
 
 target_key="intake"
-if [[ "$state" == "closed" ]] || has_label "status:done"; then
+selection_reason="default:intake"
+if [[ "$state" == "closed" ]]; then
   target_key="done"
+  selection_reason="state:closed"
+elif has_label "status:done"; then
+  target_key="done"
+  selection_reason="label:status:done"
 elif has_label "status:blocked"; then
   target_key="blocked"
+  selection_reason="label:status:blocked"
 elif has_label "stage:deployment"; then
   target_key="deployment"
+  selection_reason="label:stage:deployment"
 elif has_label "stage:verification"; then
   target_key="verification"
+  selection_reason="label:stage:verification"
 elif has_label "stage:execution"; then
   target_key="execution"
+  selection_reason="label:stage:execution"
 elif has_label "stage:decomposition"; then
   target_key="decomposition"
+  selection_reason="label:stage:decomposition"
 elif has_label "stage:review-gate"; then
   target_key="review_gate"
+  selection_reason="label:stage:review-gate"
 elif has_label "stage:design"; then
   target_key="design"
+  selection_reason="label:stage:design"
 elif has_label "stage:intake"; then
   target_key="intake"
+  selection_reason="label:stage:intake"
 fi
 
 case "$target_key" in
@@ -170,4 +183,4 @@ if [[ -n "${PROJECT_V2_GOV_FIELD_ID:-}" ]]; then
   fi
 fi
 
-echo "sync_report repo=${REPO} issue=${ISSUE_NUMBER} governance_key=${target_key} status_field_id=${PROJECT_V2_STATUS_FIELD_ID} status_option_id=${status_option_id} gov_field_updated=${gov_field_updated} gov_field_id=${PROJECT_V2_GOV_FIELD_ID:-unset} gov_option_id=${gov_option_id:-unset}"
+echo "sync_report repo=${REPO} issue=${ISSUE_NUMBER} issue_state=${state} governance_key=${target_key} selection_reason=${selection_reason} status_field_id=${PROJECT_V2_STATUS_FIELD_ID} status_option_id=${status_option_id} gov_field_updated=${gov_field_updated} gov_field_id=${PROJECT_V2_GOV_FIELD_ID:-unset} gov_option_id=${gov_option_id:-unset}"
