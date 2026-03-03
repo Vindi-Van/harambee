@@ -91,3 +91,4 @@ M5 can be closed when one dated second-repo run includes:
 
 ## Linked Artifact Template
 - `docs/validation/artifacts/m5-second-project-adoption-simulation-2026-03-02.md`
+- `docs/validation/default-branch-main-migration-runbook.md` (use when canonicalizing `master` -> `main`)
