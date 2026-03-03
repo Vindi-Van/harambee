@@ -27,6 +27,8 @@
 ## Recently Completed (Optional Backlog)
 - Added periodic replay-check operations runbook for M4 telemetry + M5 external adoption:
   - `docs/validation/m4-m5-periodic-replay-check-runbook.md`
+- Added default-branch canonicalization runbook (`master` -> `main`) with maintainer UI switch + CLI verification:
+  - `docs/validation/default-branch-main-migration-runbook.md`
 
 ## Blocked
 - None.

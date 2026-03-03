@@ -1,6 +1,6 @@
 # Harambee Task Tracker
 
-_Last updated: 2026-03-02 (completed incremental governance-state reporting refinement artifact)_
+_Last updated: 2026-03-02 (added default-branch canonicalization runbook for `main` migration)_
 
 This tracker records what is **done** vs **not done** by milestone and execution track.
 
@@ -42,4 +42,5 @@ This tracker records what is **done** vs **not done** by milestone and execution
 - M4 checklist + telemetry replay: `docs/validation/m4-redis-failure-simulation-checklist.md`, `docs/validation/artifacts/m4-live-redis-telemetry-replay-2026-03-02.md`
 - M5 adoption guide + replay artifact: `docs/starter-kit/adoption-under-1-day.md`, `docs/validation/artifacts/m5-external-adoption-replay-2026-03-02.md`
 - Final status artifact: `docs/validation/project-status-2026-03-02.md`
+- Default-branch migration runbook: `docs/validation/default-branch-main-migration-runbook.md`
 - Current board: `WORKBOARD.md`
